@@ -300,6 +300,7 @@ footer span{opacity:.5}
     <div class="balt">
       <a href="#" onclick="mostrarSQL();return false">🛠 SQL de configuração</a>
       <a href="#" onclick="abrirBackup();return false">📥 Importar backup</a>
+      <a href="#" onclick="iniciarLocal();return false">💾 Usar sem banco (local)</a>
     </div>
   </div>
 </div>
@@ -359,6 +360,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="chip" id="cdata"></div>
     <div class="sync"><div class="dot" id="sdot"></div><span id="stxt">Sem conexão</span></div>
     <span class="rt-badge" id="rtbadge">● LIVE</span>
+    <span id="local-badge" style="display:none;font-size:10px;font-family:JetBrains Mono,monospace;color:#f5a800;background:rgba(245,168,0,.1);border:1px solid rgba(245,168,0,.3);padding:3px 9px;border-radius:20px;letter-spacing:.5px">💾 LOCAL</span>
     <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
     <button class="btn ghost" onclick="abrirBackup()" title="Backup e Importação">💾 Backup</button>
     <button class="btn ghost" onclick="exportar()">⬇ Excel</button>
@@ -641,6 +643,48 @@ var CFG='ps_v5';
 var wsConn=null,wsReconectTimer=null,wsHeartbeat=null,realtimeAtivo=false;
 var sortCol='dias',sortDir=1;
 var importBuffer=[];
+var MODO_LOCAL=false; // true quando não há Supabase configurado
+var LOCAL_DB_KEY='ps_local_produtos';
+var LOCAL_ID_KEY='ps_local_next_id';
+
+// ── LOCAL DB HELPERS ──────────────────────────────────────────────────────
+function localGetAll(){try{return JSON.parse(localStorage.getItem(LOCAL_DB_KEY)||'[]');}catch(e){return[];}}
+function localSave(arr){localStorage.setItem(LOCAL_DB_KEY,JSON.stringify(arr));}
+function localNextId(){var n=parseInt(localStorage.getItem(LOCAL_ID_KEY)||'1');localStorage.setItem(LOCAL_ID_KEY,n+1);return n;}
+
+function localIns(d){
+  var arr=localGetAll();
+  var item=Object.assign({},d,{id:localNextId(),created_at:new Date().toISOString()});
+  arr.push(item);localSave(arr);return[item];
+}
+function localUpd(id,d){
+  var arr=localGetAll();
+  var i=arr.findIndex(function(x){return x.id===id;});
+  if(i>=0)arr[i]=Object.assign({},arr[i],d);
+  localSave(arr);return[arr[i]];
+}
+function localDel(id){
+  var arr=localGetAll().filter(function(x){return x.id!==id;});
+  localSave(arr);return[];
+}
+
+// ── DB FACADE (Supabase ou Local) ─────────────────────────────────────────
+function dbGet(){
+  if(MODO_LOCAL)return Promise.resolve(localGetAll());
+  return req('produtos?select=*&order=created_at.asc');
+}
+function dbIns(d){
+  if(MODO_LOCAL)return Promise.resolve(localIns(d));
+  return req('produtos',{method:'POST',body:JSON.stringify(d)});
+}
+function dbUpd(id,d){
+  if(MODO_LOCAL)return Promise.resolve(localUpd(id,d));
+  return req('produtos?id=eq.'+id,{method:'PATCH',body:JSON.stringify(d)});
+}
+function dbDel(id){
+  if(MODO_LOCAL)return Promise.resolve(localDel(id));
+  return req('produtos?id=eq.'+id,{method:'DELETE'});
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 //  CONFIG / INICIALIZAÇÃO
@@ -657,7 +701,7 @@ function conectar(){
 }
 
 function iniciar(u,k){
-  SB_URL=u;SB_KEY=k;
+  SB_URL=u;SB_KEY=k;MODO_LOCAL=false;
   document.getElementById('banner').classList.add('hidden');
   document.getElementById('fstatus').textContent='Conectado';
   document.getElementById('fstatus').classList.remove('offline');
@@ -666,6 +710,16 @@ function iniciar(u,k){
   wsConectar();
   setInterval(function(){if(SB_URL&&!realtimeAtivo)carregar();},30000);
   setInterval(function(){if(SB_URL)carregar();},120000);
+}
+
+function iniciarLocal(){
+  MODO_LOCAL=true;SB_URL='';SB_KEY='';
+  document.getElementById('banner').classList.add('hidden');
+  document.getElementById('fstatus').textContent='Modo Local';
+  document.getElementById('local-badge').style.display='inline-flex';
+  ss('live','Modo local');
+  toast('✅ Modo local ativado — dados salvos no navegador','success');
+  carregar();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -682,15 +736,13 @@ function req(path,opts){
       return r.json();
     });
 }
-function dbGet(){return req('produtos?select=*&order=created_at.asc');}
-function dbIns(d){return req('produtos',{method:'POST',body:JSON.stringify(d)});}
-function dbUpd(id,d){return req('produtos?id=eq.'+id,{method:'PATCH',body:JSON.stringify(d)});}
-function dbDel(id){return req('produtos?id=eq.'+id,{method:'DELETE'});}
+// db functions now defined above as facade (Supabase + Local fallback)
 
 // ═══════════════════════════════════════════════════════════════════════════
 //  REALTIME WEBSOCKET
 // ═══════════════════════════════════════════════════════════════════════════
 function wsConectar(){
+  if(MODO_LOCAL)return; // sem realtime no modo local
   if(wsConn){try{wsConn.close();}catch(e){}wsConn=null;}
   if(wsHeartbeat){clearInterval(wsHeartbeat);wsHeartbeat=null;}
   if(wsReconectTimer){clearTimeout(wsReconectTimer);wsReconectTimer=null;}
@@ -729,7 +781,7 @@ function ss(s,l){
 //  CARREGAR DADOS
 // ═══════════════════════════════════════════════════════════════════════════
 function carregar(){
-  if(!SB_URL)return;
+  if(!SB_URL&&!MODO_LOCAL)return;
   document.getElementById('loading').style.display='block';
   document.getElementById('empty').style.display='none';
   document.getElementById('tbody').innerHTML='';
@@ -737,7 +789,8 @@ function carregar(){
   dbGet()
     .then(function(d){
       dados=d||[];
-      ss(realtimeAtivo?'live':'','Tempo real');
+      if(MODO_LOCAL){ss('live','Modo local');}
+      else{ss(realtimeAtivo?'live':'','Tempo real');}
       document.getElementById('loading').style.display='none';
       cards();render();atualizarAlertas();
     })
@@ -917,7 +970,7 @@ function limpar(){
 }
 
 function abrirNovo(){
-  if(!SB_URL){toast('Configure a conexão primeiro!','warning');return;}
+  if(!SB_URL&&!MODO_LOCAL){toast('Configure a conexão primeiro!','warning');return;}
   editId=null;
   document.getElementById('mico').textContent='📦';
   document.getElementById('mtit').textContent='Novo produto';
@@ -1155,7 +1208,13 @@ function mostrarPreviewImport(lista,nomeArq){
 
 function confirmarImport(){
   if(!importBuffer.length){toast('Nenhum dado para importar','warning');return;}
-  if(!SB_URL){toast('Configure a conexão com o Supabase primeiro','error');fecharBK();return;}
+  if(!SB_URL&&!MODO_LOCAL){
+    // ativar modo local automaticamente e importar
+    MODO_LOCAL=true;
+    ss('live','Modo local');
+    document.getElementById('banner').classList.add('hidden');
+    toast('Modo local ativado automaticamente para importação','info');
+  }
   var btn=document.getElementById('btn-importar');
   btn.disabled=true;btn.textContent='Importando…';
   var promessas=importBuffer.map(function(p){return dbIns(p);});
@@ -1263,6 +1322,12 @@ document.addEventListener('keydown',function(e){
     document.getElementById('iurl').value=cfg.url;
     document.getElementById('ikey').value=cfg.key;
     iniciar(cfg.url,cfg.key);
+  } else {
+    // Se há produtos salvos localmente, ativar modo local automaticamente
+    var localProdutos=localGetAll();
+    if(localProdutos.length>0){
+      iniciarLocal();
+    }
   }
 })();
 </script>
