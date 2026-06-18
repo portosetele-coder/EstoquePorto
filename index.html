@@ -551,6 +551,128 @@ body:not(.side-config-ready) > #banner{display:none!important}
 main{padding-top:10px!important}
 @media(max-width:700px){.side-panel{width:92vw}.side-mini-grid{grid-template-columns:1fr}.painel-top-btn{width:auto}}
 
+
+/* ── AJUSTE FINAL DE CABEÇALHO · CENTRALIZAÇÃO ───────────────────────── */
+.tb{
+  align-items:center!important;
+  min-height:72px!important;
+  gap:14px!important;
+}
+.tl{
+  align-items:center!important;
+  min-width:280px!important;
+  flex:1 1 320px!important;
+}
+.tr{
+  align-items:center!important;
+  justify-content:flex-end!important;
+  flex:2 1 620px!important;
+  row-gap:6px!important;
+}
+.tr .btn,.tr .chip,.tr .sync,.tr .rt-badge{
+  height:36px!important;
+  display:inline-flex!important;
+  align-items:center!important;
+}
+.chip,.sync,.rt-badge{
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+.painel-top-btn{
+  height:36px!important;
+}
+@media(max-width:900px){
+  .tb{align-items:flex-start!important}
+  .tl,.tr{width:100%!important;flex:1 1 100%!important}
+  .tr{justify-content:flex-start!important}
+}
+
+
+/* ── FASE 3 · MAPA 2D INTELIGENTE DO ESTOQUE ─────────────────────────── */
+.mapa-top-btn{font-weight:800!important;border-color:rgba(255,208,52,.45)!important}
+.mapa-modal-shell{
+  position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.78);
+  backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px;
+}
+.mapa-modal-shell.open{display:flex}
+.mapa-modal{
+  width:90vw;height:90vh;background:linear-gradient(180deg,#f8f8fb,#eef0ff);
+  color:#11143a;border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,.55);
+  border:1px solid rgba(255,208,52,.35);display:flex;flex-direction:column;overflow:hidden;
+}
+.mapa-head{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:18px 22px;background:linear-gradient(135deg,#393D7B,#25295f);
+  color:#fff;border-bottom:4px solid #FFD034;
+}
+.mapa-head h2{font-size:20px;line-height:1;font-weight:900;letter-spacing:.3px;margin:0}
+.mapa-head p{font-size:12px;color:#dfe3ff;margin-top:5px}
+.mapa-close{
+  width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.10);color:#fff;font-size:26px;cursor:pointer;line-height:1;
+}
+.mapa-close:hover{background:rgba(255,255,255,.18)}
+.mapa-toolbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:12px 16px;border-bottom:1px solid #d8dbea;background:#fff;
+}
+.mapa-filtros{display:flex;gap:6px;flex-wrap:wrap}
+.mapa-filter{
+  font-family:Inter,sans-serif;border:1px solid #d8dbea;background:#f8fafc;color:#374151;
+  border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer;
+}
+.mapa-filter:hover{border-color:#FFD034;background:#fff7d1}
+.mapa-filter.active{background:#FFD034;border-color:#F28A2E;color:#111}
+.mapa-search{display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #d8dbea;border-radius:12px;padding:0 10px;min-width:260px}
+.mapa-search input{height:36px;border:0;background:transparent;outline:none;font-family:Inter,sans-serif;color:#111827;width:220px}
+.mapa-legend{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:10px 18px;background:#f8fafc;border-bottom:1px solid #e5e7eb;font-size:12px;font-weight:800;color:#4b5563}
+.mapa-legend span{display:flex;align-items:center;gap:6px}
+.map-dot{width:13px;height:13px;border-radius:50%;display:inline-block;box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+.map-dot.ok{background:#22c55e}.map-dot.wn{background:#FFD034}.map-dot.ur{background:#F28A2E}.map-dot.ve{background:#ef4444}.map-dot.empty{background:#9ca3af}
+.mapa-body{flex:1;display:grid;grid-template-columns:1fr 330px;min-height:0}
+.mapa-grid-wrap{overflow:auto;padding:18px;background:linear-gradient(180deg,#ffffff,#f4f6ff)}
+.mapa-grid{
+  display:grid;grid-template-columns:repeat(26,minmax(54px,1fr));gap:8px;min-width:1480px;
+}
+.map-cell{
+  height:64px;border:1px solid #e5e7eb;background:#fff;border-radius:14px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:.16s;position:relative;
+  box-shadow:0 6px 16px rgba(17,20,58,.06);
+}
+.map-cell:hover{transform:translateY(-2px);border-color:#393D7B;box-shadow:0 12px 24px rgba(17,20,58,.13)}
+.map-cell.selected{outline:3px solid rgba(255,208,52,.7);border-color:#F28A2E}
+.map-cell.dimmed{opacity:.18;filter:grayscale(.45)}
+.map-code{font-family:JetBrains Mono,monospace;font-size:12px;font-weight:900;color:#11143a}
+.map-status-dot{width:18px;height:18px;border-radius:50%;box-shadow:0 0 0 4px rgba(0,0,0,.06)}
+.map-cell.ok .map-status-dot{background:#22c55e}.map-cell.wn .map-status-dot{background:#FFD034}.map-cell.ur .map-status-dot{background:#F28A2E}.map-cell.ve .map-status-dot{background:#ef4444}.map-cell.empty .map-status-dot{background:#9ca3af}
+.map-cell.match{animation:mapPulse 1s ease-in-out 3;outline:3px solid rgba(57,61,123,.55)}
+@keyframes mapPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.mapa-detail{border-left:1px solid #d8dbea;background:#fff;overflow:auto;padding:16px}
+.mapa-detail-empty{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#6b7280;gap:8px}
+.mapa-detail-empty div{font-size:38px}.mapa-detail-empty strong{color:#11143a}
+.gaveta-title{font-size:17px;font-weight:900;color:#11143a;margin-bottom:10px}
+.gaveta-summary{font-size:12px;color:#6b7280;margin-bottom:12px}
+.gaveta-item{border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin-bottom:10px;background:#f9fafb}
+.gaveta-item h4{font-size:13px;font-weight:900;color:#111827;margin-bottom:8px}
+.gaveta-meta{display:grid;gap:5px;font-size:12px;color:#4b5563}
+.gaveta-meta b{color:#111827}
+.gaveta-status{display:inline-flex;width:max-content;align-items:center;gap:5px;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:900;margin-top:8px}
+.gaveta-status.ok{background:#dcfce7;color:#166534}.gaveta-status.wn{background:#fef3c7;color:#92400e}.gaveta-status.ur{background:#ffedd5;color:#9a3412}.gaveta-status.ve{background:#fee2e2;color:#991b1b}
+@media(max-width:1100px){
+  .mapa-modal{width:95vw;height:95vh}
+  .mapa-body{grid-template-columns:1fr}
+  .mapa-detail{border-left:0;border-top:1px solid #d8dbea;max-height:240px}
+}
+@media(max-width:700px){
+  .mapa-modal-shell{padding:0}
+  .mapa-modal{width:100vw;height:100vh;border-radius:0}
+  .mapa-head{padding:14px}
+  .mapa-toolbar{align-items:stretch}
+  .mapa-search{width:100%;min-width:0}.mapa-search input{width:100%}
+  .mapa-grid{grid-template-columns:repeat(26,48px);gap:6px;min-width:1320px}
+  .map-cell{height:58px;border-radius:12px}
+}
+
 </style>
 </head>
 <body>
@@ -632,6 +754,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="sync"><div class="dot" id="sdot"></div><span id="stxt">Sem conexão</span></div>
     <span class="rt-badge" id="rtbadge">● LIVE</span>
     <button class="btn ghost painel-top-btn" onclick="toggleSidePanel()">📊 Painel</button>
+    <button class="btn ghost mapa-top-btn" onclick="abrirMapaEstoque()">🗺️ Mapa</button>
     <button class="btn ghost" onclick="toggleConfig()" title="Configurações Supabase / Local">⚙️ Config</button>
     <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
     <button class="btn ghost" id="btn-notif" onclick="toggleNotificacoes()" title="Notificações do navegador">🔔 Avisos</button>
@@ -657,7 +780,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <nav class="side-nav">
       <button class="side-nav-btn active" data-side="dash" onclick="sideTab('dash')">📊 Dashboard</button>
       <button class="side-nav-btn" data-side="top5" onclick="sideTab('top5')">🏆 Top 5 Produtos</button>
-      <button class="side-nav-btn" data-side="mapa" onclick="sideTab('mapa')">🗺️ Mapa do Estoque</button>
+      <button class="side-nav-btn" data-side="mapa" onclick="abrirMapaEstoque()">🗺️ Mapa do Estoque</button>
       <button class="side-nav-btn" data-side="config" onclick="sideTab('config')">⚙️ Configurações</button>
       <button class="side-nav-btn" data-side="backup" onclick="sideTab('backup')">💾 Backup</button>
     </nav>
@@ -1863,6 +1986,66 @@ document.addEventListener('keydown',function(e){
     if(shell) shell.classList.remove('open');
   });
 })();
+</script>
+
+
+<!-- ── MODAL MAPA 2D DO ESTOQUE · FASE 3 ─────────────────────────────── -->
+<div class="mapa-modal-shell" id="mapaModal" aria-hidden="true">
+  <div class="mapa-modal">
+    <div class="mapa-head">
+      <div>
+        <h2>🗺️ MAPA DO ESTOQUE</h2>
+        <p>Monitoramento visual das gavetas e pallets.</p>
+      </div>
+      <button class="mapa-close" onclick="fecharMapaEstoque()">×</button>
+    </div>
+
+    <div class="mapa-toolbar">
+      <div class="mapa-filtros">
+        <button class="mapa-filter active" data-map-filter="todos" onclick="filtrarMapa('todos')">Todos</button>
+        <button class="mapa-filter" data-map-filter="ve" onclick="filtrarMapa('ve')">Vencidos</button>
+        <button class="mapa-filter" data-map-filter="ur" onclick="filtrarMapa('ur')">Urgentes</button>
+        <button class="mapa-filter" data-map-filter="wn" onclick="filtrarMapa('wn')">Atenção</button>
+        <button class="mapa-filter" data-map-filter="empty" onclick="filtrarMapa('empty')">Vazios</button>
+      </div>
+      <div class="mapa-search">
+        <span>🔎</span>
+        <input id="mapaBusca" placeholder="Buscar localização: A1, B2, M3..." oninput="buscarMapaLocal()">
+      </div>
+    </div>
+
+    <div class="mapa-legend">
+      <span><i class="map-dot ok"></i> OK</span>
+      <span><i class="map-dot wn"></i> Atenção</span>
+      <span><i class="map-dot ur"></i> Urgente</span>
+      <span><i class="map-dot ve"></i> Vencido</span>
+      <span><i class="map-dot empty"></i> Vazio</span>
+    </div>
+
+    <div class="mapa-body">
+      <div class="mapa-grid-wrap">
+        <div class="mapa-grid" id="mapaGrid"></div>
+      </div>
+
+      <aside class="mapa-detail" id="mapaDetail">
+        <div class="mapa-detail-empty">
+          <div>📍</div>
+          <strong>Selecione uma gaveta</strong>
+          <span>Clique em uma posição para ver os produtos armazenados.</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* ── ROTA DO MENU LATERAL PARA MODAL DO MAPA ─────────────────────────── */
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('.side-nav-btn[data-side="mapa"]').forEach(function(btn){
+    btn.onclick=function(){ abrirMapaEstoque(); };
+  });
+});
 </script>
 
 </body>
