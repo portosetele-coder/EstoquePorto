@@ -736,6 +736,13 @@ main{padding-top:10px!important}
 @media(max-width:1100px){.mapa-modal{width:95vw!important;height:95vh!important}.mapa-body{grid-template-columns:1fr!important}.mapa-detail{border-left:0!important;border-top:1px solid #d8dbea!important;max-height:240px!important}}
 @media(max-width:700px){.mapa-modal-shell{padding:0!important}.mapa-modal{width:100vw!important;height:100vh!important;border-radius:0!important}.mapa-toolbar{align-items:stretch!important}.mapa-search{width:100%!important;min-width:0!important}.mapa-search input{width:100%!important}.mapa-grid{grid-template-columns:repeat(26,48px)!important;gap:6px!important;min-width:1320px!important}.map-cell{height:58px!important;border-radius:12px!important}}
 
+
+/* ── MAPA EM ABA · BOTÃO FIXO E CABEÇALHO ALINHADO ───────────────────── */
+.mapa-aba-top-btn{font-weight:900!important;border-color:rgba(255,208,52,.55)!important}
+.tb{align-items:center!important}
+.tr{align-items:center!important}
+.tr .btn,.tr .chip,.tr .sync,.tr .rt-badge{height:36px!important;display:inline-flex!important;align-items:center!important}
+
 </style>
 </head>
 <body>
@@ -817,7 +824,8 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="sync"><div class="dot" id="sdot"></div><span id="stxt">Sem conexão</span></div>
     <span class="rt-badge" id="rtbadge">● LIVE</span>
     <button class="btn ghost painel-top-btn" onclick="abrirPainelLateral()">📊 Painel</button>
-    <button class="btn ghost mapa-top-btn" onclick="abrirMapaEstoqueFinal()">🗺️ Mapa</button>
+    <button class="btn ghost mapa-aba-top-btn" onclick="abrirMapaEstoqueAba()">🗺️ Mapa</button>
+    <button class="btn ghost mapa-top-btn" onclick="abrirMapaEstoqueAba()">🗺️ Mapa</button>
     <button class="btn ghost" onclick="toggleConfig()" title="Configurações Supabase / Local">⚙️ Config</button>
     <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
     <button class="btn ghost" id="btn-notif" onclick="toggleNotificacoes()" title="Notificações do navegador">🔔 Avisos</button>
@@ -843,7 +851,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <nav class="side-nav">
       <button class="side-nav-btn active" data-side="dash" onclick="sideTab('dash')">📊 Dashboard</button>
       <button class="side-nav-btn" data-side="top5" onclick="sideTab('top5')">🏆 Top 5 Produtos</button>
-      <button class="side-nav-btn" data-side="mapa" onclick="abrirMapaEstoqueFinal()">🗺️ Mapa do Estoque</button>
+      <button class="side-nav-btn" data-side="mapa" onclick="abrirMapaEstoqueAba()">🗺️ Mapa do Estoque</button>
       <button class="side-nav-btn" data-side="config" onclick="sideTab('config')">⚙️ Configurações</button>
       <button class="side-nav-btn" data-side="backup" onclick="sideTab('backup')">💾 Backup</button>
     </nav>
@@ -2109,6 +2117,138 @@ document.addEventListener('DOMContentLoaded',function(){
     btn.onclick=function(){ abrirMapaEstoque(); };
   });
 });
+</script>
+
+
+<script>
+/* ── FASE 3 ESTÁVEL · MAPA EM ABA INDEPENDENTE ──────────────────────── */
+(function(){
+  function mapNorm(v){ return String(v || '').trim().toUpperCase().replace(/\s+/g,''); }
+
+  function mapDias(p){
+    try{
+      if(typeof dr === 'function') return dr(p.val);
+      var hoje = new Date(); hoje.setHours(0,0,0,0);
+      var d = new Date(String(p.val || '') + 'T00:00:00');
+      return Math.ceil((d - hoje) / 86400000);
+    }catch(e){ return 9999; }
+  }
+
+  function mapFmt(v){
+    try{
+      if(typeof fmt === 'function') return fmt(v);
+      if(!v) return '—';
+      var p = String(v).split('-');
+      return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : String(v);
+    }catch(e){ return String(v || '—'); }
+  }
+
+  function coletarProdutosMapa(){
+    var base = [];
+    try{
+      if(Array.isArray(window.dados)) base = window.dados;
+      else if(typeof dados !== 'undefined' && Array.isArray(dados)) base = dados;
+    }catch(e){ base = []; }
+
+    return base.map(function(p){
+      var dias = mapDias(p);
+      var status = dias < 0 ? 've' : dias <= 7 ? 'ur' : dias <= 30 ? 'wn' : 'ok';
+      return {
+        nome: p.nome || '',
+        local: mapNorm(p.local),
+        qtd: p.qtd || 0,
+        val: p.val || '',
+        validade: mapFmt(p.val),
+        dias: dias,
+        status: status
+      };
+    });
+  }
+
+  function criarHtmlMapa(produtos){
+    var payload = JSON.stringify(produtos).replace(/</g,'\\u003c');
+    return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mapa do Estoque — Porto Seguro</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,Arial,sans-serif;background:linear-gradient(180deg,#30346f,#121638);color:#111;min-height:100vh}
+.header{background:linear-gradient(135deg,#393D7B,#25295f);color:#fff;padding:18px 22px;border-bottom:4px solid #FFD034;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.header h1{font-size:22px;font-weight:900}.header p{font-size:13px;opacity:.85;margin-top:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}.btn:hover{background:rgba(255,255,255,.18)}
+.wrap{padding:16px}.toolbar{background:#fff;border-radius:16px;padding:12px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;box-shadow:0 10px 30px rgba(0,0,0,.16)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}.filter{border:1px solid #d8dbea;background:#f8fafc;color:#374151;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900;cursor:pointer}.filter.active{background:#FFD034;border-color:#F28A2E;color:#111}
+.search{display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #d8dbea;border-radius:12px;padding:0 10px;min-width:260px}.search input{height:38px;border:0;background:transparent;outline:none;width:220px;font-size:14px}
+.legend{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#fff;border-radius:16px;padding:10px 14px;margin-bottom:12px;font-size:12px;font-weight:900;color:#4b5563}.legend span{display:flex;align-items:center;gap:6px}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block;box-shadow:0 0 0 3px rgba(0,0,0,.06)}.ok{background:#22c55e}.wn{background:#FFD034}.ur{background:#F28A2E}.ve{background:#ef4444}.empty{background:#9ca3af}
+.layout{display:grid;grid-template-columns:1fr 340px;gap:12px;min-height:calc(100vh - 190px)}.gridBox{background:#fff;border-radius:18px;overflow:auto;padding:18px;box-shadow:0 16px 40px rgba(0,0,0,.18)}
+.grid{display:grid;grid-template-columns:repeat(26,minmax(54px,1fr));gap:8px;min-width:1480px}.cell{height:64px;border:1px solid #e5e7eb;background:#fff;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:.16s;box-shadow:0 6px 16px rgba(17,20,58,.06)}
+.cell:hover{transform:translateY(-2px);border-color:#393D7B;box-shadow:0 12px 24px rgba(17,20,58,.13)}.cell.selected{outline:3px solid rgba(255,208,52,.8);border-color:#F28A2E}.cell.dimmed{opacity:.18;filter:grayscale(.45)}
+.code{font-family:monospace;font-size:12px;font-weight:900;color:#11143a}.statusDot{width:18px;height:18px;border-radius:50%;box-shadow:0 0 0 4px rgba(0,0,0,.06)}
+.cell.ok .statusDot{background:#22c55e}.cell.wn .statusDot{background:#FFD034}.cell.ur .statusDot{background:#F28A2E}.cell.ve .statusDot{background:#ef4444}.cell.empty .statusDot{background:#9ca3af}.cell.match{animation:pulse 1s ease-in-out 3;outline:3px solid rgba(57,61,123,.55)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}.detail{background:#fff;border-radius:18px;padding:16px;overflow:auto;box-shadow:0 16px 40px rgba(0,0,0,.18)}
+.emptyDetail{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#6b7280;gap:8px}.emptyDetail div{font-size:38px}.emptyDetail strong{color:#11143a}
+.title{font-size:18px;font-weight:900;color:#11143a;margin-bottom:10px}.summary{font-size:12px;color:#6b7280;margin-bottom:12px}.item{border:1px solid #e5e7eb;border-radius:14px;padding:12px;margin-bottom:10px;background:#f9fafb}.item h4{font-size:13px;font-weight:900;color:#111827;margin-bottom:8px}
+.meta{display:grid;gap:5px;font-size:12px;color:#4b5563}.meta b{color:#111827}.badge{display:inline-flex;width:max-content;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:900;margin-top:8px}.badge.ok{background:#dcfce7;color:#166534}.badge.wn{background:#fef3c7;color:#92400e}.badge.ur{background:#ffedd5;color:#9a3412}.badge.ve{background:#fee2e2;color:#991b1b}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.detail{max-height:300px}.grid{grid-template-columns:repeat(26,48px);min-width:1320px}.cell{height:58px}}@media(max-width:640px){.wrap{padding:10px}.header{padding:14px}.header h1{font-size:18px}.search{width:100%;min-width:0}.search input{width:100%}}
+</style>
+</head>
+<body>
+<header class="header"><div><h1>🗺️ MAPA DO ESTOQUE</h1><p>Monitoramento visual das gavetas e pallets — A1 até Z3.</p></div><div class="actions"><button class="btn" onclick="window.print()">🖨️ Imprimir</button><button class="btn" onclick="window.close()">Fechar</button></div></header>
+<div class="wrap">
+<div class="toolbar"><div class="filters"><button class="filter active" data-f="todos" onclick="setFiltro('todos')">Todos</button><button class="filter" data-f="ve" onclick="setFiltro('ve')">Vencidos</button><button class="filter" data-f="ur" onclick="setFiltro('ur')">Urgentes</button><button class="filter" data-f="wn" onclick="setFiltro('wn')">Atenção</button><button class="filter" data-f="empty" onclick="setFiltro('empty')">Vazios</button></div><div class="search"><span>🔎</span><input id="busca" placeholder="Buscar: A1, B2, M3..." oninput="buscar()"></div></div>
+<div class="legend"><span><i class="dot ok"></i> OK</span><span><i class="dot wn"></i> Atenção</span><span><i class="dot ur"></i> Urgente</span><span><i class="dot ve"></i> Vencido</span><span><i class="dot empty"></i> Vazio</span></div>
+<div class="layout"><div class="gridBox"><div class="grid" id="grid"></div></div><aside class="detail" id="detail"><div class="emptyDetail"><div>📍</div><strong>Selecione uma gaveta</strong><span>Clique em uma posição para ver os produtos.</span></div></aside></div>
+</div>
+<script>
+const produtos = ${payload};
+let filtro = 'todos';
+let selecionado = null;
+function letras(){return 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')}
+function norm(v){return String(v||'').trim().toUpperCase().replace(/\\s+/g,'')}
+function peso(c){return {empty:0,ok:1,wn:2,ur:3,ve:4}[c]||0}
+function label(c){return {ok:'✅ OK',wn:'🟡 Atenção',ur:'🟠 Urgente',ve:'🔴 Vencido',empty:'⚫ Vazio'}[c]||'—'}
+function esc(v){return String(v||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];})}
+function itens(pos){return produtos.filter(p=>norm(p.local)===norm(pos))}
+function statusPos(lista){if(!lista.length)return 'empty';let pior='ok';lista.forEach(p=>{if(peso(p.status)>peso(pior))pior=p.status});return pior}
+function render(){const grid=document.getElementById('grid');let html='';[3,2,1].forEach(n=>{letras().forEach(l=>{const pos=l+n;const lista=itens(pos);const st=statusPos(lista);html+='<button class="cell '+st+'" data-status="'+st+'" data-pos="'+pos+'" onclick="selecionar(\\''+pos+'\\')"><span class="code">'+pos+'</span><span class="statusDot"></span></button>'})});grid.innerHTML=html;aplicarFiltro()}
+function setFiltro(f){filtro=f;document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b.dataset.f===f));aplicarFiltro()}
+function aplicarFiltro(){document.querySelectorAll('.cell').forEach(c=>{const show=filtro==='todos'||c.dataset.status===filtro;c.classList.toggle('dimmed',!show)})}
+function buscar(){const q=norm(document.getElementById('busca').value);document.querySelectorAll('.cell').forEach(c=>c.classList.remove('match'));if(!q)return;const cell=document.querySelector('.cell[data-pos="'+q+'"]');if(cell){cell.scrollIntoView({behavior:'smooth',block:'center',inline:'center'});cell.classList.add('match');selecionar(q)}}
+function selecionar(pos){selecionado=norm(pos);document.querySelectorAll('.cell').forEach(c=>c.classList.toggle('selected',c.dataset.pos===selecionado));const box=document.getElementById('detail');const lista=itens(selecionado).sort((a,b)=>a.dias-b.dias);if(!lista.length){box.innerHTML='<div class="emptyDetail"><div>⚫</div><strong>Gaveta '+selecionado+'</strong><span>Sem produtos cadastrados nesta posição.</span></div>';return}box.innerHTML='<div class="title">📍 Gaveta '+selecionado+'</div><div class="summary">'+lista.length+' produto(s) encontrado(s)</div>'+lista.map(p=>{const diasTxt=p.dias<0?Math.abs(p.dias)+' dias vencido':p.dias+' dias restantes';return '<div class="item"><h4>'+esc(p.nome)+'</h4><div class="meta"><span><b>Quantidade:</b> '+p.qtd+' caixas</span><span><b>Validade:</b> '+p.validade+'</span><span><b>Dias restantes:</b> '+diasTxt+'</span></div><span class="badge '+p.status+'">'+label(p.status)+'</span></div>'}).join('')}
+render();
+<\/script>
+</body>
+</html>`;
+  }
+
+  window.abrirMapaEstoqueAba = function(){
+    var produtos = coletarProdutosMapa();
+    var w = window.open('', '_blank');
+    if(!w){
+      alert('O navegador bloqueou a nova aba. Libere pop-ups para abrir o mapa.');
+      return;
+    }
+    w.document.open();
+    w.document.write(criarHtmlMapa(produtos));
+    w.document.close();
+  };
+
+  window.abrirMapaEstoque = window.abrirMapaEstoqueAba;
+  window.abrirMapaEstoqueFinal = window.abrirMapaEstoqueAba;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.mapa-top-btn,.mapa-aba-top-btn,.side-nav-btn[data-side="mapa"]').forEach(function(btn){
+      btn.onclick = function(e){
+        e.preventDefault();
+        abrirMapaEstoqueAba();
+      };
+    });
+  });
+})();
 </script>
 
 </body>
