@@ -466,127 +466,112 @@ main{padding-top:16px !important}
 @media(max-width:700px){.cards.dashboard-cards{grid-template-columns:repeat(2,1fr) !important}.dashboard-cards .cn{font-size:28px !important}.hero-app.clean-hero .hero-copy h2{font-size:19px !important}.tb{padding:8px 12px !important}.tr{gap:6px}.btn{padding:7px 10px !important;font-size:12px !important}}
 
 
-/* ── FASE 1 · LIMPEZA E ORGANIZAÇÃO DA INTERFACE ─────────────────────── */
-#banner.ov{background:rgba(0,0,0,.82)!important;border:0!important;padding:16px!important;box-shadow:none!important}
-#banner.ov:not(.open){display:none!important}
-#banner.ov.open{display:flex!important}
-.config-modal{width:720px!important;max-width:100%!important}
-.config-text{font-size:12px;color:var(--tx2);line-height:1.55;margin-bottom:12px}
-.config-section{margin-bottom:18px}
-.config-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.compact-action{border:1px solid rgba(255,255,255,.12)!important;color:var(--tx)!important;font-family:Inter,sans-serif}
-main{padding:12px 18px 18px!important}
-.cards.dashboard-cards.compact-summary{grid-template-columns:repeat(5,1fr)!important;gap:8px!important;margin-bottom:8px!important}
-.compact-summary .card{padding:10px 12px!important;border-radius:14px!important;min-height:92px!important}
-.compact-summary .ci{font-size:18px!important;margin-bottom:3px!important}
-.compact-summary .cl{font-size:9.5px!important;margin-bottom:1px!important}
-.compact-summary .cn{font-size:28px!important;line-height:1!important}
-.compact-summary .cs{font-size:10px!important;margin-top:3px!important}
-.action-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);border-radius:15px;padding:9px 11px;margin-bottom:9px;box-shadow:0 8px 24px rgba(0,0,0,.14)}
-.action-left,.action-right{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.action-main{font-weight:800!important}
-.conn-badge{display:inline-flex;align-items:center;gap:5px;font-family:JetBrains Mono,monospace;font-size:10.5px;border-radius:22px;padding:5px 10px;border:1px solid rgba(255,255,255,.12);white-space:nowrap}
-.conn-badge.connected{color:var(--ok);background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.35)}
-.conn-badge.local{color:var(--porto-amarelo);background:rgba(255,208,52,.12);border-color:rgba(255,208,52,.35)}
-.conn-badge.disconnected{color:var(--ur);background:rgba(239,68,68,.10);border-color:rgba(239,68,68,.35)}
-.ctrls{margin-bottom:8px!important;padding:8px 10px!important}
-.tw{max-height:calc(100vh - 295px);min-height:360px}
-.tw table td{padding:7px 10px!important}
-.tw table thead th{padding:8px 10px!important}
-.insight-grid{display:none!important}
-.hero-app.clean-hero{display:none!important}
-.painel-modal{width:840px!important;max-width:100%!important}
-.painel-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
-.painel-tab{font-family:Inter,sans-serif;font-size:12px;font-weight:800;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);color:var(--tx2);border-radius:20px;padding:7px 13px;cursor:pointer;transition:.15s}
-.painel-tab:hover{border-color:var(--porto-amarelo);color:#fff}
-.painel-tab.active{background:rgba(255,208,52,.16);border-color:rgba(255,208,52,.45);color:var(--porto-amarelo)}
-.painel-section{display:none}
-.painel-section.active{display:block}
-.painel-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.painel-stat{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);border-radius:14px;padding:14px;text-align:center}
-.painel-stat span{display:block;font-size:11px;color:var(--tx2);font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
-.painel-stat b{display:block;font-family:JetBrains Mono,monospace;font-size:30px;color:var(--porto-amarelo);line-height:1}
-.painel-note{margin-top:12px;font-size:12px;color:var(--tx2);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:12px}
-.mapa-placeholder{text-align:center;padding:42px 20px;background:rgba(255,255,255,.045);border:1px dashed rgba(255,208,52,.35);border-radius:16px}
-.mapa-placeholder .mapa-icon{font-size:42px;margin-bottom:10px}
-.mapa-placeholder h3{font-size:18px;margin-bottom:5px}
-.mapa-placeholder p{font-size:13px;color:var(--tx2);margin-bottom:6px}
-.mapa-placeholder span{font-size:11px;color:var(--tx3)}
-@media(max-width:1100px){
-  .cards.dashboard-cards.compact-summary{grid-template-columns:repeat(3,1fr)!important}
-  .painel-stats{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:700px){
-  main{padding:10px 10px 14px!important}
-  .cards.dashboard-cards.compact-summary{grid-template-columns:repeat(2,1fr)!important}
-  .action-bar{align-items:stretch}
-  .action-left,.action-right{width:100%}
-  .action-right .btn,.action-left .btn{flex:1;justify-content:center}
-  .conn-badge{width:100%;justify-content:center}
-  .config-grid{grid-template-columns:1fr}
-  .painel-stats{grid-template-columns:repeat(2,1fr)}
+/* ── FASE 2 · OTIMIZAÇÃO PROFISSIONAL E MENU LATERAL ─────────────────── */
+.hero-app,.hero-app.clean-hero,.insight-grid{display:none!important}
+#banner.side-config-block{display:none;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+.side-shell{position:fixed;inset:0;background:rgba(0,0,0,.34);backdrop-filter:blur(2px);z-index:180;opacity:0;pointer-events:none;transition:opacity .22s ease}
+.side-shell.open{opacity:1;pointer-events:auto}
+.side-panel{position:absolute;top:0;left:0;width:360px;max-width:92vw;height:100vh;background:#f8f8fb;color:#181a2a;border-right:1px solid rgba(0,0,0,.08);box-shadow:20px 0 60px rgba(0,0,0,.35);transform:translateX(-102%);transition:transform .25s ease;display:flex;flex-direction:column}
+.side-shell.open .side-panel{transform:translateX(0)}
+.side-head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 14px;border-bottom:1px solid rgba(0,0,0,.08)}
+.side-brand{font-size:17px;font-weight:900;color:#11143a}
+.side-sub{font-size:12px;color:#6b7280;margin-top:2px}
+.side-close{width:32px;height:32px;border:1px solid rgba(0,0,0,.1);background:#fff;border-radius:9px;cursor:pointer;font-size:22px;color:#4b5563}
+.side-nav{padding:12px;display:grid;gap:4px;border-bottom:1px solid rgba(0,0,0,.08)}
+.side-nav-btn{font-family:Inter,sans-serif;text-align:left;border:0;background:transparent;color:#1f2937;font-size:14px;font-weight:600;padding:10px 12px;border-radius:10px;cursor:pointer;transition:.15s}
+.side-nav-btn:hover{background:#eef0ff}
+.side-nav-btn.active{background:#fff3c4;color:#11143a;box-shadow:inset 3px 0 0 var(--porto-amarelo)}
+.side-content{display:none;padding:16px 18px;overflow:auto;color:#1f2937}
+.side-content.active{display:block}
+.side-content h3{font-size:15px;font-weight:900;margin-bottom:12px;color:#11143a}
+.side-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.side-mini-grid div{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+.side-mini-grid span{display:block;font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.5px}
+.side-mini-grid b{display:block;font-family:JetBrains Mono,monospace;font-size:25px;color:#393d7b;line-height:1.1;margin-top:4px}
+.side-muted{font-size:12px;color:#6b7280;line-height:1.55;margin-top:12px}
+.side-top-list .top-item{background:#fff!important;border:1px solid #e5e7eb!important;color:#111827!important}
+.side-top-list .top-item b{color:#111827!important}
+.side-map-placeholder{background:#fff;border:1px dashed #cbd5e1;border-radius:14px;padding:26px 16px;text-align:center;display:grid;gap:8px;color:#4b5563}
+.side-map-placeholder div{font-size:34px}.side-map-placeholder strong{color:#11143a}.side-map-placeholder span{font-size:12px;color:#6b7280}
+.side-form{display:grid;gap:8px}.side-form label{font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.5px}
+.side-form input{width:100%;border:1px solid #d1d5db;border-radius:10px;padding:10px 11px;background:#fff;color:#111827;font-family:JetBrains Mono,monospace;font-size:12px;outline:none}
+.side-form input:focus{border-color:#393d7b;box-shadow:0 0 0 3px rgba(57,61,123,.12)}
+.side-actions-row,.side-actions-column{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.side-actions-column{flex-direction:column}.side-actions-column .btn{justify-content:center}
+.side-panel .btn.ghost{color:#1f2937!important;border-color:#d1d5db!important;background:#fff!important}
+.side-panel .btn.gold{background:linear-gradient(135deg,#FFD034,#F28A2E)!important;color:#111!important}
+main{padding:10px 16px 16px!important;max-width:1480px!important}
+.cards.dashboard-cards{gap:8px!important;margin-bottom:8px!important}
+.dashboard-cards .card{padding:10px 12px!important;min-height:92px!important;border-radius:14px!important}
+.dashboard-cards .ci{font-size:18px!important;margin-bottom:3px!important}.dashboard-cards .cn{font-size:28px!important}.dashboard-cards .cs{font-size:10px!important}
+.ctrls{padding:8px 10px!important;margin-bottom:8px!important}.tw table td{padding:7px 10px!important}.tw table thead th{padding:8px 10px!important}
+.tw{max-height:calc(100vh - 250px);min-height:390px}
+#banner:not(.side-config-block){display:none!important}
+@media(max-width:800px){
+  .side-panel{width:330px}
+  .tb{padding:8px 10px!important}
+  .logo{height:42px!important;max-width:160px!important}
+  main{padding:8px!important}
   .tw{max-height:none;min-height:320px}
 }
+@media(max-width:600px){
+  .side-panel{width:92vw}
+  .side-mini-grid{grid-template-columns:1fr}
+}
+
+
+/* ── CORREÇÃO FASE 2 · BOTÃO PAINEL + DRAWER FUNCIONAL ───────────────── */
+.painel-top-btn{font-weight:800!important;border-color:rgba(255,208,52,.45)!important}
+.side-shell{position:fixed;inset:0;background:rgba(0,0,0,.34);backdrop-filter:blur(2px);z-index:500;opacity:0;pointer-events:none;transition:opacity .22s ease}
+.side-shell.open{opacity:1;pointer-events:auto}
+.side-panel{position:absolute;top:0;left:0;width:370px;max-width:92vw;height:100vh;background:#f8f8fb;color:#181a2a;border-right:1px solid rgba(0,0,0,.08);box-shadow:20px 0 60px rgba(0,0,0,.35);transform:translateX(-102%);transition:transform .25s ease;display:flex;flex-direction:column}
+.side-shell.open .side-panel{transform:translateX(0)}
+.side-head{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 14px;border-bottom:1px solid rgba(0,0,0,.08)}
+.side-brand{font-size:17px;font-weight:900;color:#11143a}.side-sub{font-size:12px;color:#6b7280;margin-top:2px}
+.side-close{width:32px;height:32px;border:1px solid rgba(0,0,0,.1);background:#fff;border-radius:9px;cursor:pointer;font-size:22px;color:#4b5563}
+.side-nav{padding:12px;display:grid;gap:4px;border-bottom:1px solid rgba(0,0,0,.08)}
+.side-nav-btn{font-family:Inter,sans-serif;text-align:left;border:0;background:transparent;color:#1f2937;font-size:14px;font-weight:700;padding:10px 12px;border-radius:10px;cursor:pointer;transition:.15s}
+.side-nav-btn:hover{background:#eef0ff}.side-nav-btn.active{background:#fff3c4;color:#11143a;box-shadow:inset 3px 0 0 #FFD034}
+.side-content{display:none;padding:16px 18px;overflow:auto;color:#1f2937}.side-content.active{display:block}
+.side-content h3{font-size:15px;font-weight:900;margin-bottom:12px;color:#11143a}
+.side-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.side-mini-grid div{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+.side-mini-grid span{display:block;font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.5px}.side-mini-grid b{display:block;font-family:JetBrains Mono,monospace;font-size:25px;color:#393d7b;line-height:1.1;margin-top:4px}
+.side-muted{font-size:12px;color:#6b7280;line-height:1.55;margin-top:12px}.side-top-list .top-item{background:#fff!important;border:1px solid #e5e7eb!important;color:#111827!important}.side-top-list .top-item b{color:#111827!important}
+.side-map-placeholder{background:#fff;border:1px dashed #cbd5e1;border-radius:14px;padding:26px 16px;text-align:center;display:grid;gap:8px;color:#4b5563}.side-map-placeholder div{font-size:34px}.side-map-placeholder strong{color:#11143a}.side-map-placeholder span{font-size:12px;color:#6b7280}
+.side-actions-column{display:flex;gap:8px;flex-direction:column}.side-actions-column .btn{justify-content:center}
+#sideConfigSlot #banner{display:block!important;position:static!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;color:#111827!important}
+#sideConfigSlot #banner .bi,#sideConfigSlot #banner .bsteps,#sideConfigSlot #banner .bb>p{display:none!important}
+#sideConfigSlot #banner .bb{min-width:0!important;width:100%!important}
+#sideConfigSlot #banner .bb h2{color:#11143a!important;font-size:15px!important;margin-bottom:10px!important}
+#sideConfigSlot #banner .brow{display:grid!important;gap:8px!important}
+#sideConfigSlot #banner .brow input{min-width:0!important;width:100%!important;background:#fff!important;color:#111827!important;border:1px solid #d1d5db!important;border-radius:10px!important}
+#sideConfigSlot #banner .balt{border-top:1px solid #e5e7eb!important;margin-top:10px!important;padding-top:10px!important}
+#sideConfigSlot #banner .balt a{color:#393d7b!important;font-weight:700!important}
+body:not(.side-config-ready) > #banner{display:none!important}
+.hero-app,.hero-app.clean-hero,.insight-grid{display:none!important}
+main{padding-top:10px!important}
+@media(max-width:700px){.side-panel{width:92vw}.side-mini-grid{grid-template-columns:1fr}.painel-top-btn{width:auto}}
 
 </style>
 </head>
 <body>
 
-<!-- ── MODAL CONFIGURAÇÕES / SUPABASE ─────────────────────────────────── -->
-<div class="ov" id="banner">
-  <div class="modal config-modal">
-    <div class="modal-header">
-      <div class="modal-header-inner">
-        <div class="modal-title-wrap">
-          <div class="modal-icon gold-bg">⚙️</div>
-          <div>
-            <div class="modal-h1">Configurações do Sistema</div>
-            <div class="modal-sub">Supabase, modo local, SQL e backup</div>
-          </div>
-        </div>
-        <button class="modal-close" onclick="fecharConfig()">✕</button>
-      </div>
-    </div>
-    <div class="modal-divider"></div>
-    <div class="modal-body">
-      <div class="config-section">
-        <div class="form-section-title">🔗 Conexão Supabase</div>
-        <p class="config-text">Cole as credenciais do Supabase para sincronizar os dados da equipe em tempo real.</p>
-        <div class="fg">
-          <div class="f full">
-            <label>Project URL</label>
-            <input type="text" id="iurl" placeholder="https://xxxx.supabase.co">
-          </div>
-          <div class="f full">
-            <label>Anon / Publishable Key</label>
-            <input type="text" id="ikey" placeholder="eyJ... ou sb_pub...">
-          </div>
-        </div>
-        <div class="config-actions">
-          <button class="btn gold" onclick="conectar()">✓ Conectar Supabase</button>
-          <button class="btn ghost" onclick="usarLocal()">💻 Usar local</button>
-        </div>
-      </div>
+<!-- ── CONFIGURAÇÃO SUPABASE (USADA NO MENU LATERAL) ─────────────────── -->
+<div id="banner" class="side-config-block">
+  <div class="side-panel-title">⚙️ Configurações</div>
+  <p class="side-muted">Conecte o Supabase ou use o modo local. A lógica original foi preservada.</p>
 
-      <div class="config-section">
-        <div class="form-section-title">🛠 Banco e Backup</div>
-        <div class="config-grid">
-          <button class="backup-card compact-action" onclick="mostrarSQL()">
-            <div class="backup-card-icon">🛠</div>
-            <h4>SQL de configuração</h4>
-            <p>Ver script da tabela no Supabase.</p>
-          </button>
-          <button class="backup-card compact-action" onclick="abrirBackup()">
-            <div class="backup-card-icon">💾</div>
-            <h4>Backup / Importação</h4>
-            <p>Exportar ou importar dados do sistema.</p>
-          </button>
-        </div>
-      </div>
+  <div class="side-form">
+    <label>Project URL</label>
+    <input type="text" id="iurl" placeholder="https://xxxx.supabase.co">
+    <label>Anon / Publishable Key</label>
+    <input type="text" id="ikey" placeholder="eyJ... ou sb_pub...">
+    <div class="side-actions-row">
+      <button class="btn gold" onclick="conectar()">✓ Conectar</button>
+      <button class="btn ghost" onclick="usarLocal()">💻 Local</button>
     </div>
-    <div class="modal-footer">
-      <button class="btn ghost" onclick="fecharConfig()">Fechar</button>
+    <div class="side-actions-row">
+      <button class="btn ghost" onclick="mostrarSQL()">🛠 SQL</button>
+      <button class="btn ghost" onclick="abrirBackup()">💾 Backup</button>
     </div>
   </div>
 </div>
@@ -646,12 +631,87 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="chip" id="cdata"></div>
     <div class="sync"><div class="dot" id="sdot"></div><span id="stxt">Sem conexão</span></div>
     <span class="rt-badge" id="rtbadge">● LIVE</span>
+    <button class="btn ghost painel-top-btn" onclick="toggleSidePanel()">📊 Painel</button>
+    <button class="btn ghost" onclick="toggleConfig()" title="Configurações Supabase / Local">⚙️ Config</button>
+    <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
     <button class="btn ghost" id="btn-notif" onclick="toggleNotificacoes()" title="Notificações do navegador">🔔 Avisos</button>
+    <button class="btn ghost" onclick="abrirBackup()" title="Backup e Importação">💾 Backup</button>
+    <button class="btn ghost" onclick="exportar()">⬇ Excel</button>
+    <button class="btn gold" onclick="abrirNovo()">+ Novo produto</button>
   </div>
 </div>
 
 <!-- ── CONTEÚDO PRINCIPAL ─────────────────────────────────────────────── -->
+
+<!-- ── MENU LATERAL PROFISSIONAL ─────────────────────────────────────── -->
+<div class="side-shell" id="sideShell" onclick="if(event.target.id==='sideShell')fecharSidePanel()">
+  <aside class="side-panel">
+    <div class="side-head">
+      <div>
+        <div class="side-brand">Porto Seguro</div>
+        <div class="side-sub">Painel operacional</div>
+      </div>
+      <button class="side-close" onclick="fecharSidePanel()">×</button>
+    </div>
+
+    <nav class="side-nav">
+      <button class="side-nav-btn active" data-side="dash" onclick="sideTab('dash')">📊 Dashboard</button>
+      <button class="side-nav-btn" data-side="top5" onclick="sideTab('top5')">🏆 Top 5 Produtos</button>
+      <button class="side-nav-btn" data-side="mapa" onclick="sideTab('mapa')">🗺️ Mapa do Estoque</button>
+      <button class="side-nav-btn" data-side="config" onclick="sideTab('config')">⚙️ Configurações</button>
+      <button class="side-nav-btn" data-side="backup" onclick="sideTab('backup')">💾 Backup</button>
+    </nav>
+
+    <section class="side-content active" id="side-dash">
+      <h3>Dashboard</h3>
+      <div class="side-mini-grid">
+        <div><span>📦 Produtos</span><b id="sntotal">—</b></div>
+        <div><span>📦 Caixas</span><b id="sncaixas">—</b></div>
+        <div><span>⚠️ Vencendo</span><b id="snur">—</b></div>
+        <div><span>🚨 Vencidos</span><b id="snve">—</b></div>
+        <div><span>📍 Localizações</span><b id="snlocais">—</b></div>
+      </div>
+      <p class="side-muted">Resumo compacto sincronizado com a tabela principal.</p>
+    </section>
+
+    <section class="side-content" id="side-top5">
+      <h3>Top 5 Produtos</h3>
+      <div class="top-list side-top-list" id="topcriticosSide"><div class="top-empty">Sem produtos cadastrados.</div></div>
+    </section>
+
+    <section class="side-content" id="side-mapa">
+      <h3>Mapa do Estoque</h3>
+      <div class="side-map-placeholder">
+        <div>🗺️</div>
+        <strong>Mapa inteligente será implementado na Fase 3.</strong>
+        <span>Estrutura preparada para A1 até Z3 — 78 posições.</span>
+      </div>
+    </section>
+
+    <section class="side-content" id="side-config">
+      <div id="sideConfigSlot"></div>
+    </section>
+
+    <section class="side-content" id="side-backup">
+      <h3>Backup</h3>
+      <div class="side-actions-column">
+        <button class="btn gold" onclick="abrirBackup()">💾 Abrir backup/importação</button>
+        <button class="btn ghost" onclick="exportar()">📥 Exportar Excel</button>
+        <button class="btn ghost" onclick="mostrarSQL()">🛠 SQL de configuração</button>
+      </div>
+      <p class="side-muted">Ações originais preservadas. Este painel apenas organiza os atalhos.</p>
+    </section>
+  </aside>
+</div>
+
 <main>
+  <section class="hero-app clean-hero">
+    <div class="hero-copy">
+      <div class="hero-kicker">Porto Seguro Atacarejo</div>
+      <h2>Dashboard executivo de validade</h2>
+      <p>Resumo operacional do estoque, vencimentos críticos e localização dos produtos.</p>
+    </div>
+  </section>
   <!-- Alertas dinâmicos -->
   <div id="alerta-vencidos">
     <div class="al-ico">⛔</div>
@@ -668,7 +728,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     </div>
   </div>
 
-  <div class="cards dashboard-cards compact-summary">
+  <div class="cards dashboard-cards">
     <div class="card total"  id="ctotal" onclick="filtrar('todos')"><span class="ci">📦</span><div class="cl">Produtos</div><div class="cn" id="ntotal">—</div><div class="cs">Total cadastrado</div></div>
     <div class="card caixas" id="ccaixas" onclick="filtrar('todos')"><span class="ci">📦</span><div class="cl">Caixas</div><div class="cn" id="ncaixas">—</div><div class="cs">Quantidade total</div></div>
     <div class="card ur" id="cur" onclick="filtrar('ur')"><span class="ci">⚠️</span><div class="cl">Vencendo</div><div class="cn" id="nur">—</div><div class="cs">Até 30 dias</div></div>
@@ -676,17 +736,14 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="card locais" id="clocais" onclick="filtrar('todos')"><span class="ci">📍</span><div class="cl">Localizações</div><div class="cn" id="nlocais">—</div><div class="cs">Pontos ocupados</div></div>
   </div>
 
-  <div class="action-bar">
-    <div class="action-left">
-      <button class="btn ghost action-main" onclick="abrirPainel()">📊 Painel</button>
-      <button class="btn ghost action-main" onclick="toggleConfig()">⚙️ Configurações</button>
-      <span class="conn-badge disconnected" id="connBadge">🔴 Banco Desconectado</span>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-head"><div class="insight-title">Top 5 produtos mais críticos</div><div class="insight-sub">Ordenado por vencimento</div></div>
+      <div class="top-list" id="topcriticos"><div class="top-empty">Sem produtos cadastrados.</div></div>
     </div>
-    <div class="action-right">
-      <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
-      <button class="btn gold" onclick="abrirNovo()">➕ Novo Produto</button>
-      <button class="btn ghost" onclick="abrirBackup()" title="Backup e Importação">💾 Backup</button>
-      <button class="btn ghost" onclick="exportar()">📥 Excel</button>
+    <div class="insight-card">
+      <div class="insight-head"><div class="insight-title">Configuração</div><div class="insight-sub">Supabase / Local</div></div>
+      <div class="config-hint">Use <b>⚙️ Config</b> no topo para abrir ou recolher a conexão. A lógica do Supabase foi preservada.</div>
     </div>
   </div>
 
@@ -728,7 +785,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="empty" id="empty">
       <i>🔗</i>
       <h3 id="etit">Configure a conexão</h3>
-      <p id="esub">Clique em <strong>⚙️ Configurações</strong> para conectar ao Supabase ou usar o modo local.</p>
+      <p id="esub">Preencha os dados no banner acima para começar.</p>
     </div>
   </div>
 </main>
@@ -871,56 +928,6 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
   </div>
 </div>
 
-<!-- ── MODAL PAINEL EXECUTIVO ─────────────────────────────────────────── -->
-<div class="ov" id="ovpainel">
-  <div class="modal painel-modal">
-    <div class="modal-header">
-      <div class="modal-header-inner">
-        <div class="modal-title-wrap">
-          <div class="modal-icon blue-bg">📊</div>
-          <div>
-            <div class="modal-h1">Painel Executivo</div>
-            <div class="modal-sub">Dashboard, produtos críticos e mapa do estoque</div>
-          </div>
-        </div>
-        <button class="modal-close" onclick="fecharPainel()">✕</button>
-      </div>
-      <div class="painel-tabs">
-        <button class="painel-tab active" data-tab="dash" onclick="painelTab('dash')">Dashboard</button>
-        <button class="painel-tab" data-tab="top5" onclick="painelTab('top5')">Top 5</button>
-        <button class="painel-tab" data-tab="mapa" onclick="painelTab('mapa')">Mapa</button>
-      </div>
-    </div>
-    <div class="modal-divider"></div>
-    <div class="modal-body">
-      <section class="painel-section active" id="painel-dash">
-        <div class="painel-stats">
-          <div class="painel-stat"><span>📦 Produtos</span><b id="pntotal">—</b></div>
-          <div class="painel-stat"><span>📦 Caixas</span><b id="pncaixas">—</b></div>
-          <div class="painel-stat"><span>⚠️ Vencendo</span><b id="pnur">—</b></div>
-          <div class="painel-stat"><span>🚨 Vencidos</span><b id="pnve">—</b></div>
-          <div class="painel-stat"><span>📍 Localizações</span><b id="pnlocais">—</b></div>
-        </div>
-        <div class="painel-note">Resumo detalhado do estoque atual. Os números são atualizados junto com a tabela.</div>
-      </section>
-
-      <section class="painel-section" id="painel-top5">
-        <div class="insight-head"><div class="insight-title">Top 5 produtos mais críticos</div><div class="insight-sub">Vencidos primeiro, depois menor prazo</div></div>
-        <div class="top-list" id="topcriticosPainel"><div class="top-empty">Sem produtos cadastrados.</div></div>
-      </section>
-
-      <section class="painel-section" id="painel-mapa">
-        <div class="mapa-placeholder">
-          <div class="mapa-icon">🗺️</div>
-          <h3>Mapa do Estoque</h3>
-          <p>Mapa do estoque será implementado na Fase 2.</p>
-          <span>Estrutura preparada para gavetas A1 até Z3.</span>
-        </div>
-      </section>
-    </div>
-  </div>
-</div>
-
 <!-- ── MODAL BACKUP / IMPORTAR ────────────────────────────────────────── -->
 <div class="ov" id="ovbk">
   <div class="modal" style="max-width:580px">
@@ -996,16 +1003,7 @@ var importBuffer=[];
 // ═══════════════════════════════════════════════════════════════════════════
 function gcfg(){try{return JSON.parse(localStorage.getItem(CFG))||{};}catch(e){return{};}}
 
-function toggleConfig(){
-  var b=document.getElementById('banner');
-  if(!b)return;
-  b.classList.remove('hidden');
-  b.classList.toggle('open');
-}
-function fecharConfig(){
-  var b=document.getElementById('banner');
-  if(b)b.classList.remove('open');
-}
+function toggleConfig(){toggleSidePanel();sideTab('config');}
 
 function conectar(){
   var u=document.getElementById('iurl').value.trim().replace(/\/$/,'');
@@ -1020,7 +1018,7 @@ function conectar(){
 function usarLocal(){
   LOCAL_MODE=true;SB_URL='';SB_KEY='';
   localStorage.setItem(CFG,JSON.stringify({local:true}));
-  fecharConfig();
+  document.getElementById('banner').classList.add('hidden');
   document.getElementById('fstatus').textContent='Modo local';
   document.getElementById('fstatus').classList.remove('offline','local');
   document.getElementById('fstatus').classList.add('local');
@@ -1031,7 +1029,7 @@ function usarLocal(){
 
 function iniciar(u,k){
   SB_URL=u;SB_KEY=k;
-  fecharConfig();
+  document.getElementById('banner').classList.add('hidden');
   document.getElementById('fstatus').textContent='Conectado';
   document.getElementById('fstatus').classList.remove('offline');
   toast('Conectando ao banco de dados…','info');
@@ -1110,13 +1108,6 @@ function flashRTBadge(){
 function ss(s,l){
   document.getElementById('sdot').className='dot'+(s?' '+s:'');
   document.getElementById('stxt').textContent=l;
-  var cb=document.getElementById('connBadge');
-  if(cb){
-    cb.classList.remove('connected','disconnected','local');
-    if(LOCAL_MODE){cb.classList.add('local');cb.textContent='🟡 Modo Local';}
-    else if(SB_URL && l && l!=='Erro na API'){cb.classList.add('connected');cb.textContent='🟢 Banco Conectado';}
-    else{cb.classList.add('disconnected');cb.textContent='🔴 Banco Desconectado';}
-  }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1240,7 +1231,8 @@ function toggleNotificacoes(){
       toast('🔔 Notificações ativadas! Você será avisado sobre produtos vencidos e urgentes.','success');
       notificarNavegador('🔔 Avisos ativados','Você receberá notificações de produtos vencidos e urgentes mesmo com a aba em segundo plano.','teste');
     }
-    atualizarBotaoNotif();
+    syncSidePanel();
+  atualizarBotaoNotif();
   }else if(Notification.permission==='denied'){
     toast('Notificações bloqueadas no navegador. Habilite manualmente nas permissões do site (ícone de cadeado na barra de endereço).','warning');
   }else{
@@ -1285,8 +1277,7 @@ function cards(){
     if(p.local)locais[String(p.local).trim().toLowerCase()]=true;
     if(p.val)c[st(dr(p.val)).k]++;
   });
-  var map={ntotal:total,ncaixas:caixas,nur:c.ur,nve:c.ve,nlocais:Object.keys(locais).length,
-    pntotal:total,pncaixas:caixas,pnur:c.ur,pnve:c.ve,pnlocais:Object.keys(locais).length};
+  var map={ntotal:total,ncaixas:caixas,nur:c.ur,nve:c.ve,nlocais:Object.keys(locais).length,sntotal:total,sncaixas:caixas,snur:c.ur,snve:c.ve,snlocais:Object.keys(locais).length};
   Object.keys(map).forEach(function(id){
     var el=document.getElementById(id);if(!el)return;
     el.style.animation='none';
@@ -1297,8 +1288,8 @@ function cards(){
 }
 
 function renderTopCriticos(){
-  var boxes=['topcriticos','topcriticosPainel'].map(function(id){return document.getElementById(id);}).filter(Boolean);
-  if(!boxes.length)return;
+  var targets=['topcriticos','topcriticosPainel','topcriticosSide'].map(function(id){return document.getElementById(id);}).filter(Boolean);
+  if(!targets.length)return;
   var lista=dados.filter(function(p){return p.val;}).map(function(p){return Object.assign({},p,{dias:dr(p.val)});});
   lista.sort(function(a,b){
     if(a.dias<0 && b.dias>=0)return -1;
@@ -1309,9 +1300,21 @@ function renderTopCriticos(){
   var html=!lista.length?'<div class="top-empty">Sem produtos cadastrados.</div>':lista.map(function(p,i){
     var s=st(p.dias);
     var texto=p.dias<0?Math.abs(p.dias)+'d vencido':p.dias+'d restantes';
-    return '<div class="top-item"><b>'+(i+1)+'. '+esc(p.nome)+'</b><span style="color:'+s.c+'">'+texto+' · '+(p.qtd||0)+' cx</span></div>';
+    return '<div class="top-item"><b>'+(i+1)+'. '+esc(p.nome)+'</b><span style="color:'+s.c+'">'+texto+'</span></div>';
   }).join('');
-  boxes.forEach(function(box){box.innerHTML=html;});
+  targets.forEach(function(t){t.innerHTML=html;});
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  SORT
+// ═══════════════════════════════════════════════════════════════════════════
+function sortBy(col){
+  if(sortCol===col)sortDir*=-1;else{sortCol=col;sortDir=1;}
+  document.querySelectorAll('thead th').forEach(function(th){th.classList.remove('sort-asc','sort-desc');});
+  var idx={nome:0,cat:1,local:2,qtd:3,entrada:4,val:5,dias:6};
+  var ths=document.querySelectorAll('thead th');
+  if(idx[col]!==undefined){ths[idx[col]].classList.add(sortDir===1?'sort-asc':'sort-desc');}
+  render();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1375,21 +1378,36 @@ function vazio(t,s){
   document.getElementById('esub').innerHTML=s;
 }
 
+
 // ═══════════════════════════════════════════════════════════════════════════
-//  PAINEL EXECUTIVO
+//  MENU LATERAL — FASE 2
 // ═══════════════════════════════════════════════════════════════════════════
-function abrirPainel(){
-  cards();
-  document.getElementById('ovpainel').classList.add('open');
+function toggleSidePanel(){
+  var shell=document.getElementById('sideShell');
+  if(!shell)return;
+  shell.classList.toggle('open');
+  if(shell.classList.contains('open')) syncSidePanel();
 }
-function fecharPainel(){
-  document.getElementById('ovpainel').classList.remove('open');
+function fecharSidePanel(){
+  var shell=document.getElementById('sideShell');
+  if(shell)shell.classList.remove('open');
 }
-function painelTab(tab){
-  document.querySelectorAll('.painel-tab').forEach(function(b){b.classList.toggle('active',b.dataset.tab===tab);});
-  document.querySelectorAll('.painel-section').forEach(function(s){s.classList.remove('active');});
-  var alvo=document.getElementById('painel-'+tab);
+function sideTab(tab){
+  document.querySelectorAll('.side-nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.side===tab);});
+  document.querySelectorAll('.side-content').forEach(function(s){s.classList.remove('active');});
+  var alvo=document.getElementById('side-'+tab);
   if(alvo)alvo.classList.add('active');
+  syncSidePanel();
+}
+function syncSidePanel(){
+  var slot=document.getElementById('sideConfigSlot');
+  var banner=document.getElementById('banner');
+  if(slot&&banner&&banner.parentElement!==slot)slot.appendChild(banner);
+  cards();
+}
+function toggleConfig(){toggleSidePanel();sideTab('config');}
+function fecharConfig(){
+  fecharSidePanel();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1780,11 +1798,72 @@ document.addEventListener('keydown',function(e){
     document.getElementById('iurl').value=cfg.url;
     document.getElementById('ikey').value=cfg.key;
     iniciar(cfg.url,cfg.key);
-  }else{
-    ss('err','Sem conexão');
   }
   atualizarBotaoNotif();
 })();
 </script>
+
+<script>
+/* ── CORREÇÃO FASE 2 · MENU LATERAL ─────────────────────────────────── */
+(function(){
+  function moveConfig(){
+    var slot=document.getElementById('sideConfigSlot');
+    var banner=document.getElementById('banner');
+    if(slot && banner && banner.parentElement!==slot){
+      slot.appendChild(banner);
+      document.body.classList.add('side-config-ready');
+    }
+  }
+  window.toggleSidePanel=function(){
+    moveConfig();
+    var shell=document.getElementById('sideShell');
+    if(shell){
+      shell.classList.toggle('open');
+      if(shell.classList.contains('open')){ window.sideTab('dash'); syncNumbers(); }
+    }
+  };
+  window.fecharSidePanel=function(){
+    var shell=document.getElementById('sideShell');
+    if(shell) shell.classList.remove('open');
+  };
+  window.sideTab=function(tab){
+    moveConfig();
+    document.querySelectorAll('.side-nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.side===tab);});
+    document.querySelectorAll('.side-content').forEach(function(s){s.classList.remove('active');});
+    var alvo=document.getElementById('side-'+tab);
+    if(alvo) alvo.classList.add('active');
+    syncNumbers();
+  };
+  window.toggleConfig=function(){
+    var shell=document.getElementById('sideShell');
+    moveConfig();
+    if(shell) shell.classList.add('open');
+    window.sideTab('config');
+  };
+  window.abrirPainel=function(){
+    var shell=document.getElementById('sideShell');
+    moveConfig();
+    if(shell) shell.classList.add('open');
+    window.sideTab('dash');
+  };
+  function syncNumbers(){
+    var pairs=[['ntotal','sntotal'],['ncaixas','sncaixas'],['nur','snur'],['nve','snve'],['nlocais','snlocais']];
+    pairs.forEach(function(p){
+      var a=document.getElementById(p[0]), b=document.getElementById(p[1]);
+      if(a&&b)b.textContent=a.textContent||'—';
+    });
+    var src=document.getElementById('topcriticos')||document.getElementById('topcriticosPainel');
+    var dst=document.getElementById('topcriticosSide');
+    if(src&&dst)dst.innerHTML=src.innerHTML;
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    moveConfig();
+    syncNumbers();
+    var shell=document.getElementById('sideShell');
+    if(shell) shell.classList.remove('open');
+  });
+})();
+</script>
+
 </body>
 </html>
