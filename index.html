@@ -673,6 +673,69 @@ main{padding-top:10px!important}
   .map-cell{height:58px;border-radius:12px}
 }
 
+
+/* ── HOTFIX PAINEL LATERAL FUNCIONAL ─────────────────────────────────── */
+.painel-top-btn{font-weight:900!important;border-color:rgba(255,208,52,.55)!important}
+.side-shell{position:fixed!important;inset:0!important;background:rgba(0,0,0,.34)!important;backdrop-filter:blur(2px)!important;z-index:800!important;opacity:0!important;pointer-events:none!important;transition:opacity .22s ease!important}
+.side-shell.open{opacity:1!important;pointer-events:auto!important}
+.side-panel{position:absolute!important;top:0!important;left:0!important;width:370px!important;max-width:92vw!important;height:100vh!important;background:#f8f8fb!important;color:#181a2a!important;border-right:1px solid rgba(0,0,0,.08)!important;box-shadow:20px 0 60px rgba(0,0,0,.35)!important;transform:translateX(-102%)!important;transition:transform .25s ease!important;display:flex!important;flex-direction:column!important}
+.side-shell.open .side-panel{transform:translateX(0)!important}
+.side-head{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:18px 18px 14px!important;border-bottom:1px solid rgba(0,0,0,.08)!important}
+.side-brand{font-size:17px!important;font-weight:900!important;color:#11143a!important}
+.side-sub{font-size:12px!important;color:#6b7280!important;margin-top:2px!important}
+.side-close{width:32px!important;height:32px!important;border:1px solid rgba(0,0,0,.1)!important;background:#fff!important;border-radius:9px!important;cursor:pointer!important;font-size:22px!important;color:#4b5563!important}
+.side-nav{padding:12px!important;display:grid!important;gap:4px!important;border-bottom:1px solid rgba(0,0,0,.08)!important}
+.side-nav-btn{font-family:Inter,sans-serif!important;text-align:left!important;border:0!important;background:transparent!important;color:#1f2937!important;font-size:14px!important;font-weight:700!important;padding:10px 12px!important;border-radius:10px!important;cursor:pointer!important}
+.side-nav-btn:hover{background:#eef0ff!important}
+.side-nav-btn.active{background:#fff3c4!important;color:#11143a!important;box-shadow:inset 3px 0 0 #FFD034!important}
+.side-content{display:none!important;padding:16px 18px!important;overflow:auto!important;color:#1f2937!important}
+.side-content.active{display:block!important}
+#sideConfigSlot #banner{display:block!important;position:static!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;color:#111827!important}
+#sideConfigSlot #banner .bi,#sideConfigSlot #banner .bsteps,#sideConfigSlot #banner .bb>p{display:none!important}
+#sideConfigSlot #banner .bb{min-width:0!important;width:100%!important}
+#sideConfigSlot #banner .brow{display:grid!important;gap:8px!important}
+#sideConfigSlot #banner .brow input{min-width:0!important;width:100%!important;background:#fff!important;color:#111827!important;border:1px solid #d1d5db!important;border-radius:10px!important}
+
+
+/* ── HOTFIX MAPA 2D FUNCIONAL ────────────────────────────────────────── */
+.mapa-top-btn{font-weight:900!important;border-color:rgba(255,208,52,.55)!important}
+.mapa-modal-shell{position:fixed!important;inset:0!important;z-index:950!important;background:rgba(0,0,0,.78)!important;backdrop-filter:blur(7px)!important;display:none!important;align-items:center!important;justify-content:center!important;padding:18px!important}
+.mapa-modal-shell.open{display:flex!important}
+.mapa-modal{width:90vw!important;height:90vh!important;background:linear-gradient(180deg,#f8f8fb,#eef0ff)!important;color:#11143a!important;border-radius:20px!important;box-shadow:0 30px 90px rgba(0,0,0,.55)!important;border:1px solid rgba(255,208,52,.35)!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+.mapa-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;padding:18px 22px!important;background:linear-gradient(135deg,#393D7B,#25295f)!important;color:#fff!important;border-bottom:4px solid #FFD034!important}
+.mapa-head h2{font-size:20px!important;line-height:1!important;font-weight:900!important;letter-spacing:.3px!important;margin:0!important}
+.mapa-head p{font-size:12px!important;color:#dfe3ff!important;margin-top:5px!important}
+.mapa-close{width:38px!important;height:38px!important;border-radius:12px!important;border:1px solid rgba(255,255,255,.22)!important;background:rgba(255,255,255,.10)!important;color:#fff!important;font-size:26px!important;cursor:pointer!important;line-height:1!important}
+.mapa-toolbar{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;flex-wrap:wrap!important;padding:12px 16px!important;border-bottom:1px solid #d8dbea!important;background:#fff!important}
+.mapa-filtros{display:flex!important;gap:6px!important;flex-wrap:wrap!important}
+.mapa-filter{font-family:Inter,sans-serif!important;border:1px solid #d8dbea!important;background:#f8fafc!important;color:#374151!important;border-radius:999px!important;padding:7px 12px!important;font-size:12px!important;font-weight:800!important;cursor:pointer!important}
+.mapa-filter.active{background:#FFD034!important;border-color:#F28A2E!important;color:#111!important}
+.mapa-search{display:flex!important;align-items:center!important;gap:8px!important;background:#f8fafc!important;border:1px solid #d8dbea!important;border-radius:12px!important;padding:0 10px!important;min-width:260px!important}
+.mapa-search input{height:36px!important;border:0!important;background:transparent!important;outline:none!important;font-family:Inter,sans-serif!important;color:#111827!important;width:220px!important}
+.mapa-legend{display:flex!important;gap:16px!important;align-items:center!important;flex-wrap:wrap!important;padding:10px 18px!important;background:#f8fafc!important;border-bottom:1px solid #e5e7eb!important;font-size:12px!important;font-weight:800!important;color:#4b5563!important}
+.mapa-legend span{display:flex!important;align-items:center!important;gap:6px!important}.map-dot{width:13px!important;height:13px!important;border-radius:50%!important;display:inline-block!important;box-shadow:0 0 0 3px rgba(0,0,0,.05)!important}.map-dot.ok{background:#22c55e!important}.map-dot.wn{background:#FFD034!important}.map-dot.ur{background:#F28A2E!important}.map-dot.ve{background:#ef4444!important}.map-dot.empty{background:#9ca3af!important}
+.mapa-body{flex:1!important;display:grid!important;grid-template-columns:1fr 330px!important;min-height:0!important}
+.mapa-grid-wrap{overflow:auto!important;padding:18px!important;background:linear-gradient(180deg,#ffffff,#f4f6ff)!important}
+.mapa-grid{display:grid!important;grid-template-columns:repeat(26,minmax(54px,1fr))!important;gap:8px!important;min-width:1480px!important}
+.map-cell{height:64px!important;border:1px solid #e5e7eb!important;background:#fff!important;border-radius:14px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:6px!important;cursor:pointer!important;transition:.16s!important;position:relative!important;box-shadow:0 6px 16px rgba(17,20,58,.06)!important}
+.map-cell:hover{transform:translateY(-2px)!important;border-color:#393D7B!important;box-shadow:0 12px 24px rgba(17,20,58,.13)!important}
+.map-cell.selected{outline:3px solid rgba(255,208,52,.7)!important;border-color:#F28A2E!important}
+.map-cell.dimmed{opacity:.18!important;filter:grayscale(.45)!important}
+.map-code{font-family:JetBrains Mono,monospace!important;font-size:12px!important;font-weight:900!important;color:#11143a!important}
+.map-status-dot{width:18px!important;height:18px!important;border-radius:50%!important;box-shadow:0 0 0 4px rgba(0,0,0,.06)!important}
+.map-cell.ok .map-status-dot{background:#22c55e!important}.map-cell.wn .map-status-dot{background:#FFD034!important}.map-cell.ur .map-status-dot{background:#F28A2E!important}.map-cell.ve .map-status-dot{background:#ef4444!important}.map-cell.empty .map-status-dot{background:#9ca3af!important}
+.map-cell.match{animation:mapPulseFinal 1s ease-in-out 3!important;outline:3px solid rgba(57,61,123,.55)!important}
+@keyframes mapPulseFinal{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.mapa-detail{border-left:1px solid #d8dbea!important;background:#fff!important;overflow:auto!important;padding:16px!important}
+.mapa-detail-empty{height:100%!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;color:#6b7280!important;gap:8px!important}
+.mapa-detail-empty div{font-size:38px!important}.mapa-detail-empty strong{color:#11143a!important}
+.gaveta-title{font-size:17px!important;font-weight:900!important;color:#11143a!important;margin-bottom:10px!important}.gaveta-summary{font-size:12px!important;color:#6b7280!important;margin-bottom:12px!important}
+.gaveta-item{border:1px solid #e5e7eb!important;border-radius:14px!important;padding:12px!important;margin-bottom:10px!important;background:#f9fafb!important}.gaveta-item h4{font-size:13px!important;font-weight:900!important;color:#111827!important;margin-bottom:8px!important}
+.gaveta-meta{display:grid!important;gap:5px!important;font-size:12px!important;color:#4b5563!important}.gaveta-meta b{color:#111827!important}.gaveta-status{display:inline-flex!important;width:max-content!important;align-items:center!important;gap:5px!important;border-radius:999px!important;padding:4px 9px!important;font-size:11px!important;font-weight:900!important;margin-top:8px!important}
+.gaveta-status.ok{background:#dcfce7!important;color:#166534!important}.gaveta-status.wn{background:#fef3c7!important;color:#92400e!important}.gaveta-status.ur{background:#ffedd5!important;color:#9a3412!important}.gaveta-status.ve{background:#fee2e2!important;color:#991b1b!important}
+@media(max-width:1100px){.mapa-modal{width:95vw!important;height:95vh!important}.mapa-body{grid-template-columns:1fr!important}.mapa-detail{border-left:0!important;border-top:1px solid #d8dbea!important;max-height:240px!important}}
+@media(max-width:700px){.mapa-modal-shell{padding:0!important}.mapa-modal{width:100vw!important;height:100vh!important;border-radius:0!important}.mapa-toolbar{align-items:stretch!important}.mapa-search{width:100%!important;min-width:0!important}.mapa-search input{width:100%!important}.mapa-grid{grid-template-columns:repeat(26,48px)!important;gap:6px!important;min-width:1320px!important}.map-cell{height:58px!important;border-radius:12px!important}}
+
 </style>
 </head>
 <body>
@@ -753,8 +816,8 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="chip" id="cdata"></div>
     <div class="sync"><div class="dot" id="sdot"></div><span id="stxt">Sem conexão</span></div>
     <span class="rt-badge" id="rtbadge">● LIVE</span>
-    <button class="btn ghost painel-top-btn" onclick="toggleSidePanel()">📊 Painel</button>
-    <button class="btn ghost mapa-top-btn" onclick="abrirMapaEstoque()">🗺️ Mapa</button>
+    <button class="btn ghost painel-top-btn" onclick="abrirPainelLateral()">📊 Painel</button>
+    <button class="btn ghost mapa-top-btn" onclick="abrirMapaEstoqueFinal()">🗺️ Mapa</button>
     <button class="btn ghost" onclick="toggleConfig()" title="Configurações Supabase / Local">⚙️ Config</button>
     <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
     <button class="btn ghost" id="btn-notif" onclick="toggleNotificacoes()" title="Notificações do navegador">🔔 Avisos</button>
@@ -780,7 +843,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <nav class="side-nav">
       <button class="side-nav-btn active" data-side="dash" onclick="sideTab('dash')">📊 Dashboard</button>
       <button class="side-nav-btn" data-side="top5" onclick="sideTab('top5')">🏆 Top 5 Produtos</button>
-      <button class="side-nav-btn" data-side="mapa" onclick="abrirMapaEstoque()">🗺️ Mapa do Estoque</button>
+      <button class="side-nav-btn" data-side="mapa" onclick="abrirMapaEstoqueFinal()">🗺️ Mapa do Estoque</button>
       <button class="side-nav-btn" data-side="config" onclick="sideTab('config')">⚙️ Configurações</button>
       <button class="side-nav-btn" data-side="backup" onclick="sideTab('backup')">💾 Backup</button>
     </nav>
