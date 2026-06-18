@@ -465,30 +465,128 @@ main{padding-top:16px !important}
 @media(max-width:1100px){.cards.dashboard-cards{grid-template-columns:repeat(3,1fr) !important}.insight-grid{grid-template-columns:1fr}}
 @media(max-width:700px){.cards.dashboard-cards{grid-template-columns:repeat(2,1fr) !important}.dashboard-cards .cn{font-size:28px !important}.hero-app.clean-hero .hero-copy h2{font-size:19px !important}.tb{padding:8px 12px !important}.tr{gap:6px}.btn{padding:7px 10px !important;font-size:12px !important}}
 
+
+/* ── FASE 1 · LIMPEZA E ORGANIZAÇÃO DA INTERFACE ─────────────────────── */
+#banner.ov{background:rgba(0,0,0,.82)!important;border:0!important;padding:16px!important;box-shadow:none!important}
+#banner.ov:not(.open){display:none!important}
+#banner.ov.open{display:flex!important}
+.config-modal{width:720px!important;max-width:100%!important}
+.config-text{font-size:12px;color:var(--tx2);line-height:1.55;margin-bottom:12px}
+.config-section{margin-bottom:18px}
+.config-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.compact-action{border:1px solid rgba(255,255,255,.12)!important;color:var(--tx)!important;font-family:Inter,sans-serif}
+main{padding:12px 18px 18px!important}
+.cards.dashboard-cards.compact-summary{grid-template-columns:repeat(5,1fr)!important;gap:8px!important;margin-bottom:8px!important}
+.compact-summary .card{padding:10px 12px!important;border-radius:14px!important;min-height:92px!important}
+.compact-summary .ci{font-size:18px!important;margin-bottom:3px!important}
+.compact-summary .cl{font-size:9.5px!important;margin-bottom:1px!important}
+.compact-summary .cn{font-size:28px!important;line-height:1!important}
+.compact-summary .cs{font-size:10px!important;margin-top:3px!important}
+.action-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);border-radius:15px;padding:9px 11px;margin-bottom:9px;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.action-left,.action-right{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.action-main{font-weight:800!important}
+.conn-badge{display:inline-flex;align-items:center;gap:5px;font-family:JetBrains Mono,monospace;font-size:10.5px;border-radius:22px;padding:5px 10px;border:1px solid rgba(255,255,255,.12);white-space:nowrap}
+.conn-badge.connected{color:var(--ok);background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.35)}
+.conn-badge.local{color:var(--porto-amarelo);background:rgba(255,208,52,.12);border-color:rgba(255,208,52,.35)}
+.conn-badge.disconnected{color:var(--ur);background:rgba(239,68,68,.10);border-color:rgba(239,68,68,.35)}
+.ctrls{margin-bottom:8px!important;padding:8px 10px!important}
+.tw{max-height:calc(100vh - 295px);min-height:360px}
+.tw table td{padding:7px 10px!important}
+.tw table thead th{padding:8px 10px!important}
+.insight-grid{display:none!important}
+.hero-app.clean-hero{display:none!important}
+.painel-modal{width:840px!important;max-width:100%!important}
+.painel-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.painel-tab{font-family:Inter,sans-serif;font-size:12px;font-weight:800;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);color:var(--tx2);border-radius:20px;padding:7px 13px;cursor:pointer;transition:.15s}
+.painel-tab:hover{border-color:var(--porto-amarelo);color:#fff}
+.painel-tab.active{background:rgba(255,208,52,.16);border-color:rgba(255,208,52,.45);color:var(--porto-amarelo)}
+.painel-section{display:none}
+.painel-section.active{display:block}
+.painel-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.painel-stat{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);border-radius:14px;padding:14px;text-align:center}
+.painel-stat span{display:block;font-size:11px;color:var(--tx2);font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
+.painel-stat b{display:block;font-family:JetBrains Mono,monospace;font-size:30px;color:var(--porto-amarelo);line-height:1}
+.painel-note{margin-top:12px;font-size:12px;color:var(--tx2);background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);border-radius:12px;padding:12px}
+.mapa-placeholder{text-align:center;padding:42px 20px;background:rgba(255,255,255,.045);border:1px dashed rgba(255,208,52,.35);border-radius:16px}
+.mapa-placeholder .mapa-icon{font-size:42px;margin-bottom:10px}
+.mapa-placeholder h3{font-size:18px;margin-bottom:5px}
+.mapa-placeholder p{font-size:13px;color:var(--tx2);margin-bottom:6px}
+.mapa-placeholder span{font-size:11px;color:var(--tx3)}
+@media(max-width:1100px){
+  .cards.dashboard-cards.compact-summary{grid-template-columns:repeat(3,1fr)!important}
+  .painel-stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:700px){
+  main{padding:10px 10px 14px!important}
+  .cards.dashboard-cards.compact-summary{grid-template-columns:repeat(2,1fr)!important}
+  .action-bar{align-items:stretch}
+  .action-left,.action-right{width:100%}
+  .action-right .btn,.action-left .btn{flex:1;justify-content:center}
+  .conn-badge{width:100%;justify-content:center}
+  .config-grid{grid-template-columns:1fr}
+  .painel-stats{grid-template-columns:repeat(2,1fr)}
+  .tw{max-height:none;min-height:320px}
+}
+
 </style>
 </head>
 <body>
 
-<!-- ── BANNER CONFIGURAÇÃO ─────────────────────────────────────────────── -->
-<div id="banner">
-  <div class="bi">⚡</div>
-  <div class="bb">
-    <h2>Configure a conexão com o banco de dados</h2>
-    <p>Faça isso uma única vez. Cole as credenciais do Supabase abaixo — toda a equipe compartilha os mesmos dados em tempo real.</p>
-    <div class="bsteps">
-      <div class="bstep"><b>① Projeto</b><span>Acesse <code>supabase.com</code> → seu projeto → <code>Project Settings → API</code></span></div>
-      <div class="bstep"><b>② Credenciais</b><span>Copie a <code>Project URL</code> e a <code>anon / publishable key</code></span></div>
-      <div class="bstep"><b>③ Tabela</b><span>Ainda sem tabela? Clique em <code>SQL de configuração</code> abaixo e rode no Supabase</span></div>
+<!-- ── MODAL CONFIGURAÇÕES / SUPABASE ─────────────────────────────────── -->
+<div class="ov" id="banner">
+  <div class="modal config-modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-title-wrap">
+          <div class="modal-icon gold-bg">⚙️</div>
+          <div>
+            <div class="modal-h1">Configurações do Sistema</div>
+            <div class="modal-sub">Supabase, modo local, SQL e backup</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="fecharConfig()">✕</button>
+      </div>
     </div>
-    <div class="brow">
-      <input type="text" id="iurl" placeholder="Project URL — https://xxxx.supabase.co">
-      <input type="text" id="ikey" placeholder="anon / publishable key — eyJ... ou sb_pub...">
-      <button class="bbtn" onclick="conectar()">✓ Conectar</button>
-      <button class="bbtn2" onclick="usarLocal()">💻 Usar local</button>
+    <div class="modal-divider"></div>
+    <div class="modal-body">
+      <div class="config-section">
+        <div class="form-section-title">🔗 Conexão Supabase</div>
+        <p class="config-text">Cole as credenciais do Supabase para sincronizar os dados da equipe em tempo real.</p>
+        <div class="fg">
+          <div class="f full">
+            <label>Project URL</label>
+            <input type="text" id="iurl" placeholder="https://xxxx.supabase.co">
+          </div>
+          <div class="f full">
+            <label>Anon / Publishable Key</label>
+            <input type="text" id="ikey" placeholder="eyJ... ou sb_pub...">
+          </div>
+        </div>
+        <div class="config-actions">
+          <button class="btn gold" onclick="conectar()">✓ Conectar Supabase</button>
+          <button class="btn ghost" onclick="usarLocal()">💻 Usar local</button>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <div class="form-section-title">🛠 Banco e Backup</div>
+        <div class="config-grid">
+          <button class="backup-card compact-action" onclick="mostrarSQL()">
+            <div class="backup-card-icon">🛠</div>
+            <h4>SQL de configuração</h4>
+            <p>Ver script da tabela no Supabase.</p>
+          </button>
+          <button class="backup-card compact-action" onclick="abrirBackup()">
+            <div class="backup-card-icon">💾</div>
+            <h4>Backup / Importação</h4>
+            <p>Exportar ou importar dados do sistema.</p>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="balt">
-      <a href="#" onclick="mostrarSQL();return false">🛠 SQL de configuração</a>
-      <a href="#" onclick="abrirBackup();return false">📥 Importar backup</a>
+    <div class="modal-footer">
+      <button class="btn ghost" onclick="fecharConfig()">Fechar</button>
     </div>
   </div>
 </div>
@@ -548,24 +646,12 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="chip" id="cdata"></div>
     <div class="sync"><div class="dot" id="sdot"></div><span id="stxt">Sem conexão</span></div>
     <span class="rt-badge" id="rtbadge">● LIVE</span>
-    <button class="btn ghost" onclick="toggleConfig()" title="Configurações Supabase / Local">⚙️ Config</button>
-    <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
     <button class="btn ghost" id="btn-notif" onclick="toggleNotificacoes()" title="Notificações do navegador">🔔 Avisos</button>
-    <button class="btn ghost" onclick="abrirBackup()" title="Backup e Importação">💾 Backup</button>
-    <button class="btn ghost" onclick="exportar()">⬇ Excel</button>
-    <button class="btn gold" onclick="abrirNovo()">+ Novo produto</button>
   </div>
 </div>
 
 <!-- ── CONTEÚDO PRINCIPAL ─────────────────────────────────────────────── -->
 <main>
-  <section class="hero-app clean-hero">
-    <div class="hero-copy">
-      <div class="hero-kicker">Porto Seguro Atacarejo</div>
-      <h2>Dashboard executivo de validade</h2>
-      <p>Resumo operacional do estoque, vencimentos críticos e localização dos produtos.</p>
-    </div>
-  </section>
   <!-- Alertas dinâmicos -->
   <div id="alerta-vencidos">
     <div class="al-ico">⛔</div>
@@ -582,7 +668,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     </div>
   </div>
 
-  <div class="cards dashboard-cards">
+  <div class="cards dashboard-cards compact-summary">
     <div class="card total"  id="ctotal" onclick="filtrar('todos')"><span class="ci">📦</span><div class="cl">Produtos</div><div class="cn" id="ntotal">—</div><div class="cs">Total cadastrado</div></div>
     <div class="card caixas" id="ccaixas" onclick="filtrar('todos')"><span class="ci">📦</span><div class="cl">Caixas</div><div class="cn" id="ncaixas">—</div><div class="cs">Quantidade total</div></div>
     <div class="card ur" id="cur" onclick="filtrar('ur')"><span class="ci">⚠️</span><div class="cl">Vencendo</div><div class="cn" id="nur">—</div><div class="cs">Até 30 dias</div></div>
@@ -590,14 +676,17 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="card locais" id="clocais" onclick="filtrar('todos')"><span class="ci">📍</span><div class="cl">Localizações</div><div class="cn" id="nlocais">—</div><div class="cs">Pontos ocupados</div></div>
   </div>
 
-  <div class="insight-grid">
-    <div class="insight-card">
-      <div class="insight-head"><div class="insight-title">Top 5 produtos mais críticos</div><div class="insight-sub">Ordenado por vencimento</div></div>
-      <div class="top-list" id="topcriticos"><div class="top-empty">Sem produtos cadastrados.</div></div>
+  <div class="action-bar">
+    <div class="action-left">
+      <button class="btn ghost action-main" onclick="abrirPainel()">📊 Painel</button>
+      <button class="btn ghost action-main" onclick="toggleConfig()">⚙️ Configurações</button>
+      <span class="conn-badge disconnected" id="connBadge">🔴 Banco Desconectado</span>
     </div>
-    <div class="insight-card">
-      <div class="insight-head"><div class="insight-title">Configuração</div><div class="insight-sub">Supabase / Local</div></div>
-      <div class="config-hint">Use <b>⚙️ Config</b> no topo para abrir ou recolher a conexão. A lógica do Supabase foi preservada.</div>
+    <div class="action-right">
+      <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
+      <button class="btn gold" onclick="abrirNovo()">➕ Novo Produto</button>
+      <button class="btn ghost" onclick="abrirBackup()" title="Backup e Importação">💾 Backup</button>
+      <button class="btn ghost" onclick="exportar()">📥 Excel</button>
     </div>
   </div>
 
@@ -639,7 +728,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="empty" id="empty">
       <i>🔗</i>
       <h3 id="etit">Configure a conexão</h3>
-      <p id="esub">Preencha os dados no banner acima para começar.</p>
+      <p id="esub">Clique em <strong>⚙️ Configurações</strong> para conectar ao Supabase ou usar o modo local.</p>
     </div>
   </div>
 </main>
@@ -782,6 +871,56 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
   </div>
 </div>
 
+<!-- ── MODAL PAINEL EXECUTIVO ─────────────────────────────────────────── -->
+<div class="ov" id="ovpainel">
+  <div class="modal painel-modal">
+    <div class="modal-header">
+      <div class="modal-header-inner">
+        <div class="modal-title-wrap">
+          <div class="modal-icon blue-bg">📊</div>
+          <div>
+            <div class="modal-h1">Painel Executivo</div>
+            <div class="modal-sub">Dashboard, produtos críticos e mapa do estoque</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="fecharPainel()">✕</button>
+      </div>
+      <div class="painel-tabs">
+        <button class="painel-tab active" data-tab="dash" onclick="painelTab('dash')">Dashboard</button>
+        <button class="painel-tab" data-tab="top5" onclick="painelTab('top5')">Top 5</button>
+        <button class="painel-tab" data-tab="mapa" onclick="painelTab('mapa')">Mapa</button>
+      </div>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="modal-body">
+      <section class="painel-section active" id="painel-dash">
+        <div class="painel-stats">
+          <div class="painel-stat"><span>📦 Produtos</span><b id="pntotal">—</b></div>
+          <div class="painel-stat"><span>📦 Caixas</span><b id="pncaixas">—</b></div>
+          <div class="painel-stat"><span>⚠️ Vencendo</span><b id="pnur">—</b></div>
+          <div class="painel-stat"><span>🚨 Vencidos</span><b id="pnve">—</b></div>
+          <div class="painel-stat"><span>📍 Localizações</span><b id="pnlocais">—</b></div>
+        </div>
+        <div class="painel-note">Resumo detalhado do estoque atual. Os números são atualizados junto com a tabela.</div>
+      </section>
+
+      <section class="painel-section" id="painel-top5">
+        <div class="insight-head"><div class="insight-title">Top 5 produtos mais críticos</div><div class="insight-sub">Vencidos primeiro, depois menor prazo</div></div>
+        <div class="top-list" id="topcriticosPainel"><div class="top-empty">Sem produtos cadastrados.</div></div>
+      </section>
+
+      <section class="painel-section" id="painel-mapa">
+        <div class="mapa-placeholder">
+          <div class="mapa-icon">🗺️</div>
+          <h3>Mapa do Estoque</h3>
+          <p>Mapa do estoque será implementado na Fase 2.</p>
+          <span>Estrutura preparada para gavetas A1 até Z3.</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
 <!-- ── MODAL BACKUP / IMPORTAR ────────────────────────────────────────── -->
 <div class="ov" id="ovbk">
   <div class="modal" style="max-width:580px">
@@ -860,10 +999,12 @@ function gcfg(){try{return JSON.parse(localStorage.getItem(CFG))||{};}catch(e){r
 function toggleConfig(){
   var b=document.getElementById('banner');
   if(!b)return;
-  b.classList.toggle('hidden');
-  if(!b.classList.contains('hidden')){
-    setTimeout(function(){try{b.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}},40);
-  }
+  b.classList.remove('hidden');
+  b.classList.toggle('open');
+}
+function fecharConfig(){
+  var b=document.getElementById('banner');
+  if(b)b.classList.remove('open');
 }
 
 function conectar(){
@@ -879,7 +1020,7 @@ function conectar(){
 function usarLocal(){
   LOCAL_MODE=true;SB_URL='';SB_KEY='';
   localStorage.setItem(CFG,JSON.stringify({local:true}));
-  document.getElementById('banner').classList.add('hidden');
+  fecharConfig();
   document.getElementById('fstatus').textContent='Modo local';
   document.getElementById('fstatus').classList.remove('offline','local');
   document.getElementById('fstatus').classList.add('local');
@@ -890,7 +1031,7 @@ function usarLocal(){
 
 function iniciar(u,k){
   SB_URL=u;SB_KEY=k;
-  document.getElementById('banner').classList.add('hidden');
+  fecharConfig();
   document.getElementById('fstatus').textContent='Conectado';
   document.getElementById('fstatus').classList.remove('offline');
   toast('Conectando ao banco de dados…','info');
@@ -969,6 +1110,13 @@ function flashRTBadge(){
 function ss(s,l){
   document.getElementById('sdot').className='dot'+(s?' '+s:'');
   document.getElementById('stxt').textContent=l;
+  var cb=document.getElementById('connBadge');
+  if(cb){
+    cb.classList.remove('connected','disconnected','local');
+    if(LOCAL_MODE){cb.classList.add('local');cb.textContent='🟡 Modo Local';}
+    else if(SB_URL && l && l!=='Erro na API'){cb.classList.add('connected');cb.textContent='🟢 Banco Conectado';}
+    else{cb.classList.add('disconnected');cb.textContent='🔴 Banco Desconectado';}
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1137,7 +1285,8 @@ function cards(){
     if(p.local)locais[String(p.local).trim().toLowerCase()]=true;
     if(p.val)c[st(dr(p.val)).k]++;
   });
-  var map={ntotal:total,ncaixas:caixas,nur:c.ur,nve:c.ve,nlocais:Object.keys(locais).length};
+  var map={ntotal:total,ncaixas:caixas,nur:c.ur,nve:c.ve,nlocais:Object.keys(locais).length,
+    pntotal:total,pncaixas:caixas,pnur:c.ur,pnve:c.ve,pnlocais:Object.keys(locais).length};
   Object.keys(map).forEach(function(id){
     var el=document.getElementById(id);if(!el)return;
     el.style.animation='none';
@@ -1148,29 +1297,21 @@ function cards(){
 }
 
 function renderTopCriticos(){
-  var box=document.getElementById('topcriticos');
-  if(!box)return;
+  var boxes=['topcriticos','topcriticosPainel'].map(function(id){return document.getElementById(id);}).filter(Boolean);
+  if(!boxes.length)return;
   var lista=dados.filter(function(p){return p.val;}).map(function(p){return Object.assign({},p,{dias:dr(p.val)});});
-  lista.sort(function(a,b){return a.dias-b.dias;});
+  lista.sort(function(a,b){
+    if(a.dias<0 && b.dias>=0)return -1;
+    if(a.dias>=0 && b.dias<0)return 1;
+    return a.dias-b.dias;
+  });
   lista=lista.slice(0,5);
-  if(!lista.length){box.innerHTML='<div class="top-empty">Sem produtos cadastrados.</div>';return;}
-  box.innerHTML=lista.map(function(p,i){
+  var html=!lista.length?'<div class="top-empty">Sem produtos cadastrados.</div>':lista.map(function(p,i){
     var s=st(p.dias);
     var texto=p.dias<0?Math.abs(p.dias)+'d vencido':p.dias+'d restantes';
-    return '<div class="top-item"><b>'+(i+1)+'. '+esc(p.nome)+'</b><span style="color:'+s.c+'">'+texto+'</span></div>';
+    return '<div class="top-item"><b>'+(i+1)+'. '+esc(p.nome)+'</b><span style="color:'+s.c+'">'+texto+' · '+(p.qtd||0)+' cx</span></div>';
   }).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-//  SORT
-// ═══════════════════════════════════════════════════════════════════════════
-function sortBy(col){
-  if(sortCol===col)sortDir*=-1;else{sortCol=col;sortDir=1;}
-  document.querySelectorAll('thead th').forEach(function(th){th.classList.remove('sort-asc','sort-desc');});
-  var idx={nome:0,cat:1,local:2,qtd:3,entrada:4,val:5,dias:6};
-  var ths=document.querySelectorAll('thead th');
-  if(idx[col]!==undefined){ths[idx[col]].classList.add(sortDir===1?'sort-asc':'sort-desc');}
-  render();
+  boxes.forEach(function(box){box.innerHTML=html;});
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1232,6 +1373,23 @@ function vazio(t,s){
   var e=document.getElementById('empty');e.style.display='block';
   document.getElementById('etit').textContent=t;
   document.getElementById('esub').innerHTML=s;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  PAINEL EXECUTIVO
+// ═══════════════════════════════════════════════════════════════════════════
+function abrirPainel(){
+  cards();
+  document.getElementById('ovpainel').classList.add('open');
+}
+function fecharPainel(){
+  document.getElementById('ovpainel').classList.remove('open');
+}
+function painelTab(tab){
+  document.querySelectorAll('.painel-tab').forEach(function(b){b.classList.toggle('active',b.dataset.tab===tab);});
+  document.querySelectorAll('.painel-section').forEach(function(s){s.classList.remove('active');});
+  var alvo=document.getElementById('painel-'+tab);
+  if(alvo)alvo.classList.add('active');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1622,6 +1780,8 @@ document.addEventListener('keydown',function(e){
     document.getElementById('iurl').value=cfg.url;
     document.getElementById('ikey').value=cfg.key;
     iniciar(cfg.url,cfg.key);
+  }else{
+    ss('err','Sem conexão');
   }
   atualizarBotaoNotif();
 })();
