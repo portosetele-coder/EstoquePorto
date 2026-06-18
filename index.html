@@ -431,6 +431,40 @@ thead th{color:var(--porto-amarelo) !important;background:linear-gradient(180deg
   .tl{width:100% !important}
 }
 
+
+
+/* ── V8 CLEAN · DASHBOARD EXECUTIVO ─────────────────────────────────── */
+.tb{padding:8px 18px !important}
+.logo{height:52px !important;max-width:210px !important}
+main{padding-top:16px !important}
+.hero-app.clean-hero{padding:14px 18px !important;margin-bottom:14px !important;min-height:auto !important}
+.hero-app.clean-hero .hero-copy h2{font-size:22px !important;margin:0 !important}
+.hero-app.clean-hero .hero-copy p{margin-top:4px !important;font-size:12px !important}
+.hero-app.clean-hero::after{font-size:46px !important;bottom:-18px !important}
+.cards.dashboard-cards{grid-template-columns:repeat(5,1fr) !important;gap:10px !important;margin-bottom:12px !important}
+.dashboard-cards .card{padding:14px 15px !important;border-radius:16px !important;cursor:pointer}
+.dashboard-cards .ci{font-size:20px !important;margin-bottom:6px !important}
+.dashboard-cards .cn{font-size:32px !important;letter-spacing:-1px !important}
+.dashboard-cards .cs{font-size:10.5px !important}
+.card.total::before{background:linear-gradient(90deg,var(--porto-amarelo),var(--porto-laranja))}
+.card.total .cn{color:var(--porto-amarelo)}
+.card.caixas::before{background:linear-gradient(90deg,#60a5fa,var(--porto-azul))}
+.card.caixas .cn{color:#93c5fd}
+.card.locais::before{background:linear-gradient(90deg,#38bdf8,#2563eb)}
+.card.locais .cn{color:#7dd3fc}
+.insight-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:12px;margin-bottom:14px}
+.insight-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:13px 15px;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.insight-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.insight-title{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--porto-amarelo)}
+.insight-sub{font-size:11px;color:var(--tx3)}
+.top-list{display:grid;gap:6px}
+.top-item{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 10px;font-size:12px}
+.top-item b{font-weight:800;color:#fff}.top-item span{font-family:JetBrains Mono,monospace;font-size:11px;white-space:nowrap}.top-empty{font-size:12px;color:var(--tx3);padding:8px 0}
+.config-hint{font-size:12px;color:var(--tx2);line-height:1.55}.config-hint b{color:var(--porto-amarelo)}
+.ctrls{padding:9px 12px !important;margin-bottom:10px !important}.tw table td{padding:9px 12px !important}.tw table thead th{padding:9px 12px !important}.loc-tag::before{content:'📍 '}
+@media(max-width:1100px){.cards.dashboard-cards{grid-template-columns:repeat(3,1fr) !important}.insight-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.cards.dashboard-cards{grid-template-columns:repeat(2,1fr) !important}.dashboard-cards .cn{font-size:28px !important}.hero-app.clean-hero .hero-copy h2{font-size:19px !important}.tb{padding:8px 12px !important}.tr{gap:6px}.btn{padding:7px 10px !important;font-size:12px !important}}
+
 </style>
 </head>
 <body>
@@ -514,6 +548,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     <div class="chip" id="cdata"></div>
     <div class="sync"><div class="dot" id="sdot"></div><span id="stxt">Sem conexão</span></div>
     <span class="rt-badge" id="rtbadge">● LIVE</span>
+    <button class="btn ghost" onclick="toggleConfig()" title="Configurações Supabase / Local">⚙️ Config</button>
     <button class="btn ico" onclick="carregar()" title="Atualizar">↻</button>
     <button class="btn ghost" id="btn-notif" onclick="toggleNotificacoes()" title="Notificações do navegador">🔔 Avisos</button>
     <button class="btn ghost" onclick="abrirBackup()" title="Backup e Importação">💾 Backup</button>
@@ -524,15 +559,11 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
 
 <!-- ── CONTEÚDO PRINCIPAL ─────────────────────────────────────────────── -->
 <main>
-  <section class="hero-app">
+  <section class="hero-app clean-hero">
     <div class="hero-copy">
       <div class="hero-kicker">Porto Seguro Atacarejo</div>
-      <h2>Painel de validade e estoque</h2>
-      <p>Controle rápido dos produtos por vencimento, com alertas visuais, backup, importação e exportação.</p>
-    </div>
-    <div class="hero-actions">
-      <button class="btn ghost hero-btn" onclick="abrirBackup()">💾 Backup</button>
-      <button class="btn gold hero-btn-main" onclick="abrirNovo()">+ Novo produto</button>
+      <h2>Dashboard executivo de validade</h2>
+      <p>Resumo operacional do estoque, vencimentos críticos e localização dos produtos.</p>
     </div>
   </section>
   <!-- Alertas dinâmicos -->
@@ -551,11 +582,23 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
     </div>
   </div>
 
-  <div class="cards">
-    <div class="card ok"  id="cok"  onclick="filtrar('ok')"><span class="ci">✅</span><div class="cl">OK</div><div class="cn" id="nok">—</div><div class="cs">Mais de 60 dias</div></div>
-    <div class="card wn"  id="cwn"  onclick="filtrar('wn')"><span class="ci">🔶</span><div class="cl">Atenção</div><div class="cn" id="nwn">—</div><div class="cs">31 a 60 dias</div></div>
-    <div class="card ur"  id="cur"  onclick="filtrar('ur')"><span class="ci">⚠️</span><div class="cl">Urgente</div><div class="cn" id="nur">—</div><div class="cs">Até 30 dias</div></div>
-    <div class="card ve"  id="cve"  onclick="filtrar('ve')"><span class="ci">⛔</span><div class="cl">Vencido</div><div class="cn" id="nve">—</div><div class="cs">Retirar agora</div></div>
+  <div class="cards dashboard-cards">
+    <div class="card total"  id="ctotal" onclick="filtrar('todos')"><span class="ci">📦</span><div class="cl">Produtos</div><div class="cn" id="ntotal">—</div><div class="cs">Total cadastrado</div></div>
+    <div class="card caixas" id="ccaixas" onclick="filtrar('todos')"><span class="ci">📦</span><div class="cl">Caixas</div><div class="cn" id="ncaixas">—</div><div class="cs">Quantidade total</div></div>
+    <div class="card ur" id="cur" onclick="filtrar('ur')"><span class="ci">⚠️</span><div class="cl">Vencendo</div><div class="cn" id="nur">—</div><div class="cs">Até 30 dias</div></div>
+    <div class="card ve" id="cve" onclick="filtrar('ve')"><span class="ci">🚨</span><div class="cl">Vencidos</div><div class="cn" id="nve">—</div><div class="cs">Ação imediata</div></div>
+    <div class="card locais" id="clocais" onclick="filtrar('todos')"><span class="ci">📍</span><div class="cl">Localizações</div><div class="cn" id="nlocais">—</div><div class="cs">Pontos ocupados</div></div>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-head"><div class="insight-title">Top 5 produtos mais críticos</div><div class="insight-sub">Ordenado por vencimento</div></div>
+      <div class="top-list" id="topcriticos"><div class="top-empty">Sem produtos cadastrados.</div></div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-head"><div class="insight-title">Configuração</div><div class="insight-sub">Supabase / Local</div></div>
+      <div class="config-hint">Use <b>⚙️ Config</b> no topo para abrir ou recolher a conexão. A lógica do Supabase foi preservada.</div>
+    </div>
   </div>
 
   <div class="ctrls">
@@ -571,7 +614,7 @@ ALTER PUBLICATION supabase_realtime ADD TABLE produtos;</pre>
       </div>
     </div>
     <div class="ctrls-right">
-      <div class="srch"><span class="si">🔍</span><input type="text" id="busca" placeholder="Buscar produto…" oninput="render()"></div>
+      <div class="srch"><span class="si">🔍</span><input type="text" id="busca" placeholder="Buscar produto, local, categoria ou observação…" oninput="render()"></div>
     </div>
   </div>
 
@@ -813,6 +856,15 @@ var importBuffer=[];
 //  CONFIG / INICIALIZAÇÃO
 // ═══════════════════════════════════════════════════════════════════════════
 function gcfg(){try{return JSON.parse(localStorage.getItem(CFG))||{};}catch(e){return{};}}
+
+function toggleConfig(){
+  var b=document.getElementById('banner');
+  if(!b)return;
+  b.classList.toggle('hidden');
+  if(!b.classList.contains('hidden')){
+    setTimeout(function(){try{b.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}},40);
+  }
+}
 
 function conectar(){
   var u=document.getElementById('iurl').value.trim().replace(/\/$/,'');
@@ -1077,13 +1129,36 @@ function notificarNavegador(titulo,corpo,tag){
 // ═══════════════════════════════════════════════════════════════════════════
 function cards(){
   var c={ok:0,wn:0,ur:0,ve:0};
-  dados.forEach(function(p){if(p.val)c[st(dr(p.val)).k]++;});
-  ['ok','wn','ur','ve'].forEach(function(k){
-    var el=document.getElementById('n'+k);
+  var total=dados.length;
+  var caixas=0;
+  var locais={};
+  dados.forEach(function(p){
+    caixas+=Number(p.qtd||0);
+    if(p.local)locais[String(p.local).trim().toLowerCase()]=true;
+    if(p.val)c[st(dr(p.val)).k]++;
+  });
+  var map={ntotal:total,ncaixas:caixas,nur:c.ur,nve:c.ve,nlocais:Object.keys(locais).length};
+  Object.keys(map).forEach(function(id){
+    var el=document.getElementById(id);if(!el)return;
     el.style.animation='none';
-    el.textContent=c[k];
+    el.textContent=map[id];
     setTimeout(function(){el.style.animation='popIn .35s cubic-bezier(.34,1.2,.64,1)';},10);
   });
+  renderTopCriticos();
+}
+
+function renderTopCriticos(){
+  var box=document.getElementById('topcriticos');
+  if(!box)return;
+  var lista=dados.filter(function(p){return p.val;}).map(function(p){return Object.assign({},p,{dias:dr(p.val)});});
+  lista.sort(function(a,b){return a.dias-b.dias;});
+  lista=lista.slice(0,5);
+  if(!lista.length){box.innerHTML='<div class="top-empty">Sem produtos cadastrados.</div>';return;}
+  box.innerHTML=lista.map(function(p,i){
+    var s=st(p.dias);
+    var texto=p.dias<0?Math.abs(p.dias)+'d vencido':p.dias+'d restantes';
+    return '<div class="top-item"><b>'+(i+1)+'. '+esc(p.nome)+'</b><span style="color:'+s.c+'">'+texto+'</span></div>';
+  }).join('');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
